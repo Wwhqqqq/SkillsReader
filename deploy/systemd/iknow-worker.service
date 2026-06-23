@@ -1,0 +1,16 @@
+[Unit]
+Description=IKnow Scan Worker
+After=network.target mysql.service redis.service
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/iknow/backend
+Environment=PYTHONPATH=/opt/iknow/backend
+EnvironmentFile=/opt/iknow/.env
+ExecStart=/opt/iknow/backend/.venv/bin/python -m app.worker.scan_loop
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,61 @@
+# 各公司官方 Skill 门户（仅官网/API，不含 GitHub、SkillsMP、ClawHub）
+portals:
+  - vendor: 美团
+    name: 美团 AI Hub Skill 列表
+    url: https://developer.meituan.com/ai-hub/skill-list
+    source_id: meituan_ai_hub
+
+  - vendor: 阿里
+    name: 阿里云 Agent Skills 门户
+    url: https://skills.aliyun.com
+    source_id: aliyun_skills_portal
+
+  - vendor: 字节
+    name: 火山引擎 AgentKit Skills
+    url: https://www.volcengine.com/docs/86681/2155845
+    source_id: volcengine_find
+
+  - vendor: 腾讯
+    name: 微信小程序 AI 开发
+    url: https://developers.weixin.qq.com/miniprogram/dev/ai/guide.html
+    source_id: wechat_skillhub
+
+  - vendor: 知乎
+    name: 知乎数据开放平台
+    url: https://developer.zhihu.com
+    source_id: zhihu_skills
+
+  - vendor: 小红书
+    name: RED Skill 官方目录
+    url: https://redskill.org/
+    source_id: xiaohongshu_red_skill
+
+  - vendor: 哔哩哔哩
+    name: 哔哩哔哩开放平台
+    url: https://open.bilibili.com/
+    source_id: bilibili_skills
+
+  - vendor: 快手
+    name: 快手开放平台
+    url: https://open.kuaishou.com/
+    source_id: kuaishou_skills
+
+  - vendor: 滴滴
+    name: 滴滴 MCP / Skill
+    url: https://mcp.didichuxing.com/
+    source_id: didi_skills
+
+  - vendor: 拼多多
+    name: 拼多多开放平台
+    url: https://open.pinduoduo.com/
+    source_id: pinduoduo_skills
+
+  - vendor: 携程
+    name: 携程 OpenClaw / Skill
+    url: https://www.ctrip.com/wendao/openclaw
+    source_id: ctrip_skills
+
+  - vendor: 得物
+    name: 得物开放平台
+    url: https://open.dewu.com/
+    source_id: dewu_skills

@@ -1,0 +1,15 @@
+{
+  "美团|skillsmp:multi": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:queue": {
+    "relevant": true,
+    "reason": "美团 API 专用",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  }
+}

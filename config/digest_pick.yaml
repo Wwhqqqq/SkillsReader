@@ -1,0 +1,131 @@
+# 每日精选 —— 生产评分与调度
+version: "3"
+
+schedule:
+  times:
+    - "09:00"
+    - "18:00"
+  timezone: Asia/Shanghai
+  official_new:
+    enabled: false
+    time: "08:30"
+    top_n: 10
+
+# 增长窗口：1/3/7 个「8 小时周期」前（非自然日）
+metrics:
+  period_hours: 8
+  lookback_periods: [1, 3, 7]
+
+selection:
+  default_top_n: 10
+  candidate_pool_limit: 1200
+  quality_threshold: 40
+
+  slots:
+    official:
+      count: 3
+      pool: official
+    trend:
+      count: 4
+      pool: trend
+    discovery:
+      count: 3
+      pool: discovery
+
+  diversity:
+    max_per_vendor: 2
+    max_per_platform: 4
+
+pools:
+  domestic_vendors:
+    - 美团
+    - 阿里
+    - 腾讯
+    - 字节
+    - 知乎
+    - 小红书
+    - 哔哩哔哩
+    - 快手
+    - 滴滴
+    - 拼多多
+    - 携程
+    - 得物
+
+  entry:
+    min_install: 50
+    github_stars_baseline: 30
+
+  official:
+    min_quality: 45
+
+  popularity:
+    min_install: 200
+    min_quality: 45
+
+  trend:
+    min_trend_velocity: 50
+
+  discovery:
+    max_age_days: 14
+    min_quality: 50
+    min_description_len: 30
+
+scoring:
+  mode: whitelist_install
+
+  final_weights:
+    trend: 0.55
+    official: 0.40
+    quality: 0.03
+    diversity: 0.02
+
+  install_exponent: 0.42
+  install_multiplier: 3.2
+  whitelist_vendor_score: 85
+  official_publisher_score: 70
+
+  velocity_weights:
+    z_1d: 0.40
+    z_3d: 0.30
+    z_7d: 0.30
+  trend_velocity_factor: 0.05
+
+  source_weights:
+    skills_sh: 1.0
+    github_watch: 0.9
+    default: 0.8
+
+  official_publisher_bonus: 30
+  domestic_vendor_bonus: 15
+  metadata_official_bonus: 20
+
+push:
+  table_only: true
+  title_template: "SkillGetter 每日精选 Top{top_n} · {date}"
+  include_score_breakdown: false
+  include_recommend_reason: true
+  polish_description: true
+  description_max_len: 25
+  official_new:
+    table_only: false
+    include_title: true
+    title_template: "🆕 官方 Skill 新增 · {date}"
+    include_recommend_reason: true
+    include_score_breakdown: false
+    polish_description: true
+    description_max_len: 200
+    max_new_days: 1
+    top_n: 50
+    max_per_vendor: 20
+
+skills_sh:
+  keywords:
+    - 腾讯
+    - 阿里
+    - 字节
+    - AI
+    - agent
+    - workflow
+  api_paths:
+    - "/api/latest"
+    - "/api/skills/latest"

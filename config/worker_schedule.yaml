@@ -1,0 +1,19 @@
+# Worker 调度 —— 生产环境默认策略
+version: "1"
+
+# 每 10 分钟扫官方门户；有新增则推送到单聊
+official_portal:
+  interval_sec: 600
+  push_on_new: true
+  push_target: dm
+  push_all_new: true
+
+# 每 8 小时全量扫所有 enabled 源
+full_scan:
+  interval_sec: 28800
+
+# 关闭按 sources.yaml interval_sec 的逐源轮询（由 full_scan 统一负责）
+per_source_scan: false
+
+# Worker 重启后等待再执行首次调度（官方/全量均适用）
+startup_delay_sec: 180

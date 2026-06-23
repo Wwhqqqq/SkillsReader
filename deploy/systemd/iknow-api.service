@@ -1,0 +1,16 @@
+[Unit]
+Description=IKnow API Server
+After=network.target mysql.service redis.service
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/iknow/backend
+Environment=PYTHONPATH=/opt/iknow/backend
+EnvironmentFile=/opt/iknow/.env
+ExecStart=/opt/iknow/backend/.venv/bin/python -m app.main
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

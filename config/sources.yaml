@@ -1,0 +1,142 @@
+sources:
+  - id: meituan_ai_hub
+    vendor: 美团
+    name: 美团 AI Hub Skill 列表
+    url: https://developer.meituan.com/ai-hub/skill-list
+    category: domestic_lifestyle
+    enabled: true
+    interval_sec: 300
+    adapter: meituan
+    priority: 1
+
+  - id: aliyun_skills_portal
+    vendor: 阿里
+    name: 阿里云 Agent Skills 门户
+    url: https://help.aliyun.com/zh/skillsportal/
+    category: cloud
+    enabled: true
+    interval_sec: 600
+    adapter: aliyun_skills
+    priority: 2
+
+  - id: skills_sh
+    vendor: 海外社区
+    name: skills.sh
+    url: https://skills.sh
+    category: supplemental
+    enabled: true
+    interval_sec: 1800
+    adapter: skills_sh
+    priority: 5
+    supplemental: true
+
+  - id: github_watch
+    vendor: GitHub
+    name: GitHub Skill 仓库监控
+    url: https://github.com
+    category: supplemental
+    enabled: true
+    interval_sec: 3600
+    adapter: github_watch
+    priority: 6
+    supplemental: true
+
+  - id: volcengine_find
+    vendor: 字节
+    name: 字节跳动 Skill 生态（火山/扣子/GitHub）
+    url: https://www.volcengine.com/docs/86681/2155845
+    category: domestic
+    enabled: true
+    interval_sec: 600
+    adapter: volcengine_find
+    priority: 3
+
+  - id: zhihu_skills
+    vendor: 知乎
+    name: 知乎 Agent Skills 社区
+    url: https://www.zhihu.com
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: zhihu_skills
+    priority: 4
+
+  - id: xiaohongshu_red_skill
+    vendor: 小红书
+    name: 小红书 RED Skill
+    url: https://redskill.org/
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: xiaohongshu_red_skill
+    priority: 4
+
+  - id: bilibili_skills
+    vendor: 哔哩哔哩
+    name: 哔哩哔哩 Agent Skills 社区
+    url: https://open.bilibili.com/
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: bilibili_skills
+    priority: 4
+
+  - id: kuaishou_skills
+    vendor: 快手
+    name: 快手 Agent Skills 社区
+    url: https://open.kuaishou.com/
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: kuaishou_skills
+    priority: 4
+
+  - id: didi_skills
+    vendor: 滴滴
+    name: 滴滴 Agent Skills 社区
+    url: https://mcp.didichuxing.com/
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: didi_skills
+    priority: 4
+
+  - id: pinduoduo_skills
+    vendor: 拼多多
+    name: 拼多多 Agent Skills 社区
+    url: https://open.pinduoduo.com/
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: pinduoduo_skills
+    priority: 4
+
+  - id: ctrip_skills
+    vendor: 携程
+    name: 携程 Agent Skills 社区
+    url: https://www.ctrip.com/wendao/openclaw
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: ctrip_skills
+    priority: 4
+
+  - id: dewu_skills
+    vendor: 得物
+    name: 得物 Agent Skills 社区
+    url: https://open.dewu.com/#/api
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: dewu_skills
+    priority: 4
+
+  - id: wechat_skillhub
+    vendor: 腾讯
+    name: 腾讯 Agent Skills 社区
+    url: https://developers.weixin.qq.com/miniprogram/dev/ai/guide.html
+    category: domestic
+    enabled: true
+    interval_sec: 900
+    adapter: wechat_skillhub
+    priority: 4
