@@ -182,6 +182,7 @@ async def get_official_scan_state() -> dict[str, Any]:
         "vendor_new_counts": {},
         "push_status": None,
         "error_message": None,
+        "last_new_official_at": None,
     }
     r = await get_redis()
     if r:

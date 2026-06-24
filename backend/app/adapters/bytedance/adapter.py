@@ -11,6 +11,7 @@ import re
 import httpx
 
 from app.adapters.base import RawSkillRecord, SourceAdapter
+from app.adapters.common.clawhub_search import fetch_clawhub_for_vendor
 from app.adapters.common.github import (
     build_records_from_repo,
     github_headers,
@@ -22,28 +23,7 @@ from app.adapters.bytedance.agentkit import list_sharing_skills
 from app.adapters.common.record_utils import preapprove_platform_record
 from app.adapters.common.skillsmp_catalog import fetch_skillsmp_for_vendor
 from app.services.enrichment.vendor_relevance import apply_vendor_relevance_split
-
-# 官方 GitHub 技能仓库（verified）
-BYTE_GITHUB_REPOS: tuple[tuple[str, tuple[str, ...], tuple[str, ...] | None], ...] = (
-    (
-        "volcengine/volcengine-skills",
-        ("skills",),
-        (
-            "skills/volcengine-api",
-            "skills/volcengine-cli",
-            "skills/volcengine-db-supabase",
-            "skills/volcengine-deploy",
-            "skills/volcengine-iac",
-            "skills/volcengine-knowledge-search",
-            "skills/volcengine-landing-zone",
-            "skills/volcengine-prepare",
-            "skills/volcengine-sdk-generator",
-            "skills/volcengine-tosutil",
-            "skills/volcengine-troubleshooting",
-            "skills/volcengine-vefaas",
-        ),
-    ),
-)
+from app.adapters.common.official_github_config import vendor_github_scan_specs
 
 # 官方文档入口（无公开 list API 时的锚点 Skill）
 OFFICIAL_ENTRIES = [
@@ -137,7 +117,7 @@ class BytedanceSkillsAdapter(SourceAdapter):
             )
 
         async with httpx.AsyncClient(timeout=timeout) as client:
-            for repo, roots, known in BYTE_GITHUB_REPOS:
+            for repo, roots, known in vendor_github_scan_specs(self.vendor):
                 try:
                     batch = await build_records_from_repo(
                         client,
@@ -154,6 +134,7 @@ class BytedanceSkillsAdapter(SourceAdapter):
                         meta = dict(rec.metadata or {})
                         meta["catalog"] = "official_github"
                         meta["official"] = True
+                        meta["repo"] = repo
                         rec.metadata = meta
                         if rec.external_id not in seen:
                             seen.add(rec.external_id)
@@ -232,6 +213,17 @@ class BytedanceSkillsAdapter(SourceAdapter):
                 vendor=self.vendor,
                 source_id=self.source_id,
                 max_pages=3,
+            ):
+                rec = preapprove_platform_record(rec)
+                if rec.external_id not in seen:
+                    seen.add(rec.external_id)
+                    records.append(rec)
+
+            for rec in await fetch_clawhub_for_vendor(
+                client,
+                vendor=self.vendor,
+                source_id=self.source_id,
+                queries=("volcengine", "字节", "doubao", "扣子", "agentkit", "火山"),
             ):
                 rec = preapprove_platform_record(rec)
                 if rec.external_id not in seen:

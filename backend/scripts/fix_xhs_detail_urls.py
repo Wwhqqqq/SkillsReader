@@ -41,7 +41,7 @@ async def main() -> None:
             meta = skill.metadata_json if isinstance(skill.metadata_json, dict) else {}
             meta = dict(meta)
             meta.setdefault("slug", slug)
-            meta["redskill"] = True
+            meta["redskill_catalog"] = True
             meta["catalog"] = "clawhub"
             meta["clawhub"] = True
             skill.detail_url = new_url

@@ -1,0 +1,54 @@
+# 各公司官方 GitHub Skill 仓库 —— 全量扫描抓取，新发现立即推送单聊
+version: "1"
+
+repos:
+  # 腾讯
+  - vendor: 腾讯
+    repo: Tencent/AgentlyMail
+    roots: [skills]
+  - vendor: 腾讯
+    repo: Tencent/openclaw-weixin
+    roots: ["", skills]
+  - vendor: 腾讯
+    repo: TencentCloudBase/skills
+  - vendor: 腾讯
+    repo: TencentCloudBase/awesome-miniprogram-skills
+  - vendor: 腾讯
+    repo: TencentCloudBase/cloudbase-skills
+  - vendor: 腾讯
+    repo: TencentCloudBase/CloudBase-MCP
+  - vendor: 腾讯
+    repo: TencentCloudBase/mp-skills
+  - vendor: 腾讯
+    repo: wechat-miniprogram/ai-mode-skills
+  - vendor: 腾讯
+    repo: WecomTeam/wecom-openclaw-plugin
+    roots: [skills]
+
+  # 字节
+  - vendor: 字节
+    repo: volcengine/volcengine-skills
+    roots: [skills]
+    known_prefixes:
+      - skills/volcengine-api
+      - skills/volcengine-cli
+      - skills/volcengine-db-supabase
+      - skills/volcengine-deploy
+      - skills/volcengine-iac
+      - skills/volcengine-knowledge-search
+      - skills/volcengine-landing-zone
+      - skills/volcengine-prepare
+      - skills/volcengine-sdk-generator
+      - skills/volcengine-tosutil
+      - skills/volcengine-troubleshooting
+      - skills/volcengine-vefaas
+
+  # 滴滴
+  - vendor: 滴滴
+    repo: didi/didi-ride-skill
+    roots: ["", skills]
+
+# 代码搜索命中时，组织前缀视为官方 GitHub（补充显式 repos 列表）
+org_prefixes:
+  - vendor: 滴滴
+    prefix: didi/

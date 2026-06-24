@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import {
   NButton,
+  NInput,
   NInputNumber,
   NRadioGroup,
   NRadio,
@@ -10,6 +11,7 @@ import {
   useMessage,
 } from 'naive-ui'
 import { api } from '../api/client'
+import { formatBeijingTime } from '../utils/time'
 
 const message = useMessage()
 const pushTarget = ref('dm')
@@ -25,9 +27,14 @@ const selectedVendors = ref<string[]>([])
 const allVendors = ref<string[]>([])
 const sending = ref(false)
 const pushTargets = ref({
+  dm_users: ['wangheqiao'],
+  group_ids: ['13038971'],
+  official_new_dm_users: ['wangheqiao'],
   dm: { label: '单聊', default_user: 'wangheqiao' },
   group: { label: '群聊', default_group_id: '13038971' },
 })
+const newDmInput = ref('')
+const newGroupInput = ref('')
 
 const scheduleEnabled = ref(true)
 const scheduleTimes = ref('09:00,18:00')
@@ -52,8 +59,8 @@ const slotLabels: Record<string, string> = {
 }
 
 const targetLabels = computed(() => ({
-  dm: `单聊（${pushTargets.value.dm.default_user}）`,
-  group: `群聊（toid：${pushTargets.value.group.default_group_id}）`,
+  dm: `单聊（${(pushTargets.value.dm_users || []).join('、') || pushTargets.value.dm.default_user}）`,
+  group: `群聊（toid：${(pushTargets.value.group_ids || []).join('、') || pushTargets.value.group.default_group_id}）`,
 }))
 
 const previewHint = computed(() => {
@@ -84,12 +91,44 @@ async function loadSchedule() {
   }
 }
 
-onMounted(async () => {
+async function loadPushTargets() {
   try {
     pushTargets.value = await api.pushTargets()
   } catch {
     /* use defaults */
   }
+}
+
+async function addRecipient(kind: 'dm' | 'group') {
+  const val = (kind === 'dm' ? newDmInput.value : newGroupInput.value).trim()
+  if (!val) return
+  const listKey = kind === 'dm' ? 'dm_users' : 'group_ids'
+  const current = pushTargets.value[listKey as 'dm_users' | 'group_ids'] || []
+  if (current.includes(val)) {
+    message.warning('已在名单中')
+    return
+  }
+  try {
+    pushTargets.value = await api.addPushTarget({ kind, value: val })
+    if (kind === 'dm') newDmInput.value = ''
+    else newGroupInput.value = ''
+    message.success(`已添加 ${val}`)
+  } catch (e: any) {
+    message.error(e.message)
+  }
+}
+
+async function removeRecipient(kind: 'dm' | 'group', value: string) {
+  try {
+    pushTargets.value = await api.removePushTarget({ kind, value })
+    message.success(`已移除 ${value}`)
+  } catch (e: any) {
+    message.error(e.message)
+  }
+}
+
+onMounted(async () => {
+  await loadPushTargets()
   const src = await api.sources()
   allVendors.value = [...new Set(src.map((s: any) => s.vendor))].filter(
     (v) => !['海外社区', 'GitHub'].includes(v)
@@ -224,6 +263,49 @@ function growthLabel(g: any) {
     </div>
 
     <div class="panel">
+      <div class="panel-header">推送收件人名单</div>
+      <div style="margin-bottom: 16px" class="text-muted">
+        手动推送与定时精选会按名单发送；单聊推送给所有单聊 ID，群聊推送给所有群 ID。
+      </div>
+
+      <div style="margin-bottom: 16px">
+        <div style="font-weight: 600; margin-bottom: 8px">单聊 ID</div>
+        <NTag
+          v-for="u in pushTargets.dm_users || []"
+          :key="'dm-' + u"
+          closable
+          size="small"
+          style="margin-right: 6px; margin-bottom: 6px"
+          @close="removeRecipient('dm', u)"
+        >
+          {{ u }}
+        </NTag>
+        <div style="display: flex; gap: 8px; margin-top: 8px; max-width: 360px">
+          <NInput v-model:value="newDmInput" placeholder="输入如流用户名" size="small" />
+          <NButton size="small" @click="addRecipient('dm')">添加</NButton>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px">
+        <div style="font-weight: 600; margin-bottom: 8px">群聊 ID（toid）</div>
+        <NTag
+          v-for="g in pushTargets.group_ids || []"
+          :key="'group-' + g"
+          closable
+          size="small"
+          style="margin-right: 6px; margin-bottom: 6px"
+          @close="removeRecipient('group', g)"
+        >
+          {{ g }}
+        </NTag>
+        <div style="display: flex; gap: 8px; margin-top: 8px; max-width: 360px">
+          <NInput v-model:value="newGroupInput" placeholder="输入群 toid" size="small" />
+          <NButton size="small" @click="addRecipient('group')">添加</NButton>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
       <div style="margin-bottom: 16px">
         <span class="text-muted" style="margin-right: 12px">推送渠道:</span>
         <NRadioGroup v-model:value="pushChannel">
@@ -292,7 +374,7 @@ function growthLabel(g: any) {
       <div class="panel-header">推送历史</div>
       <div class="log-stream" style="height: 160px">
         <div v-for="h in history" :key="h.id" class="log-line info">
-          [{{ h.created_at?.slice(0, 19) }}] {{ historyTargetLabel(h.target) }} · {{ historyTypeLabel(h.push_type) }} · {{ h.status }} · {{ h.skill_count }} 条
+          [{{ formatBeijingTime(h.created_at) }}] {{ historyTargetLabel(h.target) }} · {{ historyTypeLabel(h.push_type) }} · {{ h.status }} · {{ h.skill_count }} 条
           <span v-if="h.error" style="color: #f45b5b"> · {{ h.error }}</span>
         </div>
       </div>

@@ -38,3 +38,8 @@ def per_source_scan_enabled() -> bool:
 def startup_delay_sec() -> int:
     cfg = load_worker_schedule()
     return int(cfg.get("startup_delay_sec") or 180)
+
+
+def full_scan_push_official_new() -> bool:
+    cfg = load_worker_schedule()
+    return bool((cfg.get("full_scan") or {}).get("push_official_new", True))

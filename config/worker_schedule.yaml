@@ -11,6 +11,7 @@ official_portal:
 # 每 8 小时全量扫所有 enabled 源
 full_scan:
   interval_sec: 28800
+  push_official_new: true
 
 # 关闭按 sources.yaml interval_sec 的逐源轮询（由 full_scan 统一负责）
 per_source_scan: false

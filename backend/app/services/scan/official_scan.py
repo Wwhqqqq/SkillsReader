@@ -11,8 +11,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.redis_client import get_official_scan_state, set_official_scan_state
 from app.models import Skill
-from app.services.enrichment.skill_classification import is_official_publisher
 from app.services.scan.events import emit_event
+from app.services.scan.official_new_push import filter_official_new_ids, push_official_new_skills
 from app.services.scan.official_portals import list_official_portal_sources
 from app.services.scan.scanner import scan_source
 
@@ -37,56 +37,7 @@ class OfficialScanBatchResult:
 async def _official_ids_from_new(
     session: AsyncSession, new_ids: list[int]
 ) -> list[int]:
-    if not new_ids:
-        return []
-    skills = list(
-        (await session.scalars(select(Skill).where(Skill.id.in_(new_ids)))).all()
-    )
-    return [s.id for s in skills if is_official_publisher(s)]
-
-
-async def _push_official_new(session: AsyncSession, skill_ids: list[int]) -> str | None:
-    """扫描完成后推送本轮官方新增（无新增则跳过）。"""
-    if not skill_ids:
-        return None
-    try:
-        from app.services.digest.engine import save_digest_run, select_official_new_from_scan_ids
-        from app.services.push.ruliu_notifier import send_digest
-        from app.services.scan.schedule_config import load_worker_schedule
-
-        sched = load_worker_schedule()
-        portal_cfg = sched.get("official_portal") or {}
-        target = str(portal_cfg.get("push_target") or "dm")
-        push_all = bool(portal_cfg.get("push_all_new", True))
-        top_n = len(skill_ids) if push_all else int(
-            ((await get_digest_schedule()).get("official_new_top_n") or 10)
-        )
-        result = await select_official_new_from_scan_ids(
-            session, skill_ids, top_n=top_n
-        )
-        if not result.items:
-            return "skipped_empty"
-        run = await save_digest_run(session, result, push_status="pending")
-        await send_digest(result.content_md, dry_run=False, target=target)
-        run.push_status = "sent"
-        run.pushed_at = datetime.now(timezone.utc).replace(tzinfo=None)
-        await emit_event(
-            session,
-            event_type="official_new_push",
-            message=f"官方新增已推送 {len(result.items)} 条 → {target}",
-            level="success",
-            payload={"skill_count": len(result.items), "target": target},
-        )
-        return "sent"
-    except Exception as exc:
-        logger.exception("official new push failed")
-        await emit_event(
-            session,
-            event_type="official_new_push_error",
-            message=f"官方新增推送失败: {exc}",
-            level="error",
-        )
-        return "failed"
+    return await filter_official_new_ids(session, new_ids)
 
 
 async def run_official_scan_batch(
@@ -159,10 +110,16 @@ async def run_official_scan_batch(
         batch.vendor_new_counts = vendor_counts
         batch.finished_at = datetime.now(timezone.utc).replace(tzinfo=None)
         batch.status = "done"
+        last_new_at = None
+        if batch.new_official_skill_ids:
+            last_new_at = batch.finished_at.isoformat()
 
         if push_after and batch.new_skill_ids:
-            batch.push_status = await _push_official_new(
-                session, batch.new_skill_ids
+            batch.push_status = await push_official_new_skills(
+                session,
+                batch.new_skill_ids,
+                source="official_portal_scan",
+                push_all=True,
             )
 
         await emit_event(
@@ -209,6 +166,7 @@ async def run_official_scan_batch(
             "vendor_new_counts": batch.vendor_new_counts,
             "error_message": batch.error_message,
             "push_status": batch.push_status,
+            **({"last_new_official_at": last_new_at} if last_new_at else {}),
         }
     )
     return batch

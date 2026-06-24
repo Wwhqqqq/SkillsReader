@@ -11,6 +11,7 @@ from __future__ import annotations
 import httpx
 
 from app.adapters.base import RawSkillRecord, SourceAdapter
+from app.adapters.common.clawhub_search import fetch_clawhub_for_vendor
 from app.adapters.common.skillsmp_catalog import fetch_skillsmp_for_vendor
 from app.services.enrichment.vendor_relevance import apply_vendor_relevance_split
 
@@ -53,6 +54,16 @@ class AliyunSkillsAdapter(SourceAdapter):
                 vendor=self.vendor,
                 source_id=self.source_id,
                 max_pages=2,
+            ):
+                if rec.external_id not in seen:
+                    seen.add(rec.external_id)
+                    records.append(rec)
+
+            for rec in await fetch_clawhub_for_vendor(
+                client,
+                vendor=self.vendor,
+                source_id=self.source_id,
+                queries=("aliyun", "阿里", "dashscope", "tongyi", "阿里云 skill"),
             ):
                 if rec.external_id not in seen:
                     seen.add(rec.external_id)

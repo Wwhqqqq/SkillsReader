@@ -229,6 +229,25 @@ class OfficialScanStatusOut(BaseModel):
     vendor_new_counts: dict[str, int] = Field(default_factory=dict)
     push_status: str | None = None
     error_message: str | None = None
+    last_new_official_at: str | None = None
+    interval_sec: int | None = None
+    default_interval_sec: int | None = None
+
+
+class OfficialPortalSettingsUpdate(BaseModel):
+    interval_sec: int | None = None
+    official_new_dm_users: list[str] | None = None
+
+
+class PushRecipientAddRequest(BaseModel):
+    kind: str  # dm | group | official_new
+    value: str
+
+
+class PushRecipientsUpdate(BaseModel):
+    dm_users: list[str] | None = None
+    group_ids: list[str] | None = None
+    official_new_dm_users: list[str] | None = None
 
 
 class AdapterProbeRequest(BaseModel):

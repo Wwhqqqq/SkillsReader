@@ -24,9 +24,9 @@ from app.adapters.common.platform_filters import (
 )
 from app.adapters.didi.catalog import fetch_clawhub_didi, fetch_skillsmp_didi
 from app.services.enrichment.vendor_relevance import apply_vendor_relevance_split
-
-DIDI_GITHUB_REPOS: tuple[tuple[str, tuple[str, ...] | None], ...] = (
-    ("didi/didi-ride-skill", None),
+from app.adapters.common.official_github_config import (
+    is_official_github_repo,
+    vendor_github_scan_specs,
 )
 
 CODE_SEARCH_QUERIES = (
@@ -124,7 +124,7 @@ class DidiSkillsAdapter(SourceAdapter):
             ):
                 self._add_record(records, seen, rec)
 
-            for repo, known in DIDI_GITHUB_REPOS:
+            for repo, roots, known in vendor_github_scan_specs(self.vendor):
                 try:
                     batch = await build_records_from_repo(
                         client,
@@ -133,7 +133,7 @@ class DidiSkillsAdapter(SourceAdapter):
                         source_id=self.source_id,
                         headers=headers,
                         tags=["滴滴", "GitHub", "官方"],
-                        roots=("", "skills"),
+                        roots=roots,
                         known_prefixes=known,
                         category_default="官方",
                         record_filter=is_didi_relevant,
@@ -142,6 +142,7 @@ class DidiSkillsAdapter(SourceAdapter):
                         meta = dict(rec.metadata or {})
                         meta.setdefault("catalog", "official_github")
                         meta["official"] = True
+                        meta["repo"] = repo
                         rec.metadata = meta
                         self._add_record(records, seen, rec)
                 except Exception:
@@ -167,7 +168,7 @@ class DidiSkillsAdapter(SourceAdapter):
                         skill_name, desc, category = parse_skill_md(text, skill_name, fallback_desc)
                     else:
                         desc, category = fallback_desc, "社区"
-                    catalog = "official_github" if repo.lower().startswith("didi/") else "github"
+                    catalog = "official_github" if is_official_github_repo(repo) else "github"
                     rec = RawSkillRecord(
                         external_id=key,
                         name=skill_name,
@@ -181,7 +182,7 @@ class DidiSkillsAdapter(SourceAdapter):
                             "path": path,
                             "categoryName": category,
                             "catalog": catalog,
-                            "official": repo.lower().startswith("didi/"),
+                            "official": is_official_github_repo(repo),
                         },
                     )
                     self._add_record(records, seen, rec)

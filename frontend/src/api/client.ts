@@ -32,11 +32,15 @@ export function downloadSkillsBundle(params: {
   today_only?: boolean
   recent_only?: boolean
   scope?: 'domestic' | 'all'
+  vendors?: string
+  fmt?: 'csv' | 'xlsx'
 }) {
   const q = new URLSearchParams()
   if (params.recent_only) q.set('recent_only', 'true')
   else if (params.today_only) q.set('today_only', 'true')
   if (params.scope) q.set('scope', params.scope)
+  if (params.vendors) q.set('vendors', params.vendors)
+  if (params.fmt) q.set('fmt', params.fmt)
   window.open(`/api/skills/export/bundle?${q.toString()}`, '_blank')
 }
 
@@ -77,6 +81,9 @@ export const api = {
   triggerScan: (body: object = {}) =>
     request('/api/scan/trigger', { method: 'POST', body: JSON.stringify(body) }),
   officialScanStatus: () => request<any>('/api/scan/official/status'),
+  officialScanSettings: () => request<any>('/api/scan/official/settings'),
+  updateOfficialScanSettings: (body: object) =>
+    request<any>('/api/scan/official/settings', { method: 'PUT', body: JSON.stringify(body) }),
   officialScanPortals: () => request<any[]>('/api/scan/official/portals'),
   triggerOfficialScan: () =>
     request<any>('/api/scan/official', { method: 'POST' }),
@@ -84,6 +91,10 @@ export const api = {
   pushPreview: (body: object) =>
     request<any>('/api/push/preview', { method: 'POST', body: JSON.stringify(body) }),
   pushTargets: () => request<any>('/api/push/targets'),
+  addPushTarget: (body: { kind: string; value: string }) =>
+    request<any>('/api/push/targets/add', { method: 'POST', body: JSON.stringify(body) }),
+  removePushTarget: (body: { kind: string; value: string }) =>
+    request<any>('/api/push/targets/remove', { method: 'POST', body: JSON.stringify(body) }),
   pushSend: (body: object) =>
     request<any>('/api/push/send', { method: 'POST', body: JSON.stringify(body) }),
   pushHistory: () => request<any[]>('/api/push/history'),

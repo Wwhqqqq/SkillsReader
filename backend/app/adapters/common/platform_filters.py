@@ -264,7 +264,7 @@ def is_zhihu_relevant(rec: RawSkillRecord) -> bool:
 def is_xhs_relevant(rec: RawSkillRecord) -> bool:
     meta = rec.metadata or {}
     external_id = rec.external_id or ""
-    if meta.get("official") or meta.get("redskill") or external_id.startswith("redskill:"):
+    if meta.get("official") or meta.get("redskill_catalog") or meta.get("redskill") or external_id.startswith("redskill:"):
         return True
     if external_id.startswith("github-case:"):
         return True
@@ -411,9 +411,17 @@ def _tencent_noise_without_signal(blob: str, repo: str = "") -> bool:
 
 
 def is_tencent_relevant(rec: RawSkillRecord) -> bool:
+    from app.adapters.common.official_github_config import official_github_repo_for_vendor
+
     meta = rec.metadata or {}
     external_id = rec.external_id or ""
     if meta.get("official"):
+        return True
+    repo = str(meta.get("repo") or repo_from_record(rec) or "")
+    if repo and official_github_repo_for_vendor("腾讯", repo):
+        return True
+    owner = str(meta.get("owner") or "")
+    if owner and official_github_repo_for_vendor("腾讯", owner):
         return True
     if external_id.startswith(("clawhub:", "skillsmp:")):
         return True

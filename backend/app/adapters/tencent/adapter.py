@@ -25,28 +25,15 @@ from app.adapters.common.platform_filters import (
 from app.adapters.common.record_utils import add_platform_record
 from app.adapters.tencent.catalog import fetch_clawhub_tencent, fetch_skillsmp_tencent
 from app.services.enrichment.vendor_relevance import apply_vendor_relevance_split
-
-TENCENT_GITHUB_REPOS: tuple[tuple[str, tuple[str, ...] | None], ...] = (
-    ("TencentCloudBase/skills", None),
-    ("TencentCloudBase/awesome-miniprogram-skills", None),
-    ("TencentCloudBase/cloudbase-skills", None),
-    ("TencentCloudBase/CloudBase-MCP", None),
-    ("wechat-miniprogram/ai-mode-skills", None),
-    ("WecomTeam/wecom-openclaw-plugin", ("skills",)),
-    ("Tencent/wechat-miniprogram-demo", None),
-    ("wechat-miniprogram/miniprogram-demo", None),
+from app.adapters.common.official_github_config import (
+    is_official_github_repo,
+    official_github_repo_for_vendor,
+    vendor_github_scan_specs,
 )
 
-OFFICIAL_GITHUB_REPOS = frozenset(
-    {
-        "TencentCloudBase/skills",
-        "TencentCloudBase/awesome-miniprogram-skills",
-        "TencentCloudBase/cloudbase-skills",
-        "TencentCloudBase/CloudBase-MCP",
-        "TencentCloudBase/mp-skills",
-        "wechat-miniprogram/ai-mode-skills",
-        "WecomTeam/wecom-openclaw-plugin",
-    }
+COMMUNITY_GITHUB_REPOS: tuple[tuple[str, tuple[str, ...] | None], ...] = (
+    ("Tencent/wechat-miniprogram-demo", None),
+    ("wechat-miniprogram/miniprogram-demo", None),
 )
 
 CODE_SEARCH_QUERIES = (
@@ -209,9 +196,9 @@ class WechatSkillhubAdapter(SourceAdapter):
             ):
                 self._add_record(records, seen, rec)
 
-            for repo, known in TENCENT_GITHUB_REPOS:
+            for repo, roots, known in vendor_github_scan_specs(self.vendor):
                 try:
-                    is_official_repo = repo in OFFICIAL_GITHUB_REPOS
+                    is_official_repo = is_official_github_repo(repo)
                     batch = await build_records_from_repo(
                         client,
                         repo,
@@ -219,7 +206,7 @@ class WechatSkillhubAdapter(SourceAdapter):
                         source_id=self.source_id,
                         headers=headers,
                         tags=["腾讯", "GitHub", "官方" if is_official_repo else "社区"],
-                        roots=("", "skills"),
+                        roots=roots,
                         known_prefixes=known,
                         category_default="官方" if is_official_repo else "社区",
                         record_filter=is_tencent_relevant,
@@ -229,8 +216,31 @@ class WechatSkillhubAdapter(SourceAdapter):
                         if is_official_repo:
                             meta.setdefault("catalog", "official_github")
                             meta["official"] = True
+                            meta["repo"] = repo
                         else:
                             meta.setdefault("catalog", "github")
+                        rec.metadata = meta
+                        self._add_record(records, seen, rec)
+                except Exception:
+                    continue
+
+            for repo, known in COMMUNITY_GITHUB_REPOS:
+                try:
+                    batch = await build_records_from_repo(
+                        client,
+                        repo,
+                        vendor=self.vendor,
+                        source_id=self.source_id,
+                        headers=headers,
+                        tags=["腾讯", "GitHub", "社区"],
+                        roots=("", "skills"),
+                        known_prefixes=known,
+                        category_default="社区",
+                        record_filter=is_tencent_relevant,
+                    )
+                    for rec in batch:
+                        meta = dict(rec.metadata or {})
+                        meta.setdefault("catalog", "github")
                         rec.metadata = meta
                         self._add_record(records, seen, rec)
                 except Exception:
@@ -269,7 +279,11 @@ class WechatSkillhubAdapter(SourceAdapter):
                         skill_name, desc, category = parse_skill_md(text, skill_name, fallback_desc)
                     else:
                         desc, category = fallback_desc, "社区"
-                    catalog = "official_github" if repo in OFFICIAL_GITHUB_REPOS else "github"
+                    catalog = (
+                        "official_github"
+                        if official_github_repo_for_vendor(self.vendor, repo)
+                        else "github"
+                    )
                     rec = RawSkillRecord(
                         external_id=key,
                         name=skill_name,
@@ -283,12 +297,14 @@ class WechatSkillhubAdapter(SourceAdapter):
                             "path": path,
                             "categoryName": category,
                             "catalog": catalog,
-                            "official": repo in OFFICIAL_GITHUB_REPOS,
+                            "official": catalog == "official_github",
                         },
                     )
                     self._add_record(records, seen, rec)
 
-            known_repos = {r for r, _ in TENCENT_GITHUB_REPOS}
+            known_repos = {
+                r for r, _, _ in vendor_github_scan_specs(self.vendor)
+            } | {r for r, _ in COMMUNITY_GITHUB_REPOS}
             extra_repos: set[str] = set()
             for query in REPO_SEARCH_QUERIES:
                 for item in await search_repositories(client, query, headers, per_page=8):

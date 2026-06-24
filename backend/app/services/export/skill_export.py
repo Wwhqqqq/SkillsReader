@@ -308,20 +308,31 @@ async def list_export_vendors(
     return vendors
 
 
-async def build_vendor_csv_bundle(
+async def build_vendor_bundle(
     session: AsyncSession,
     *,
     today_only: bool = False,
     recent_only: bool = False,
     scope: str = "domestic",
+    vendors: list[str] | None = None,
+    fmt: str = "csv",
 ) -> tuple[bytes, list[str]]:
-    """One CSV per company, packaged as ZIP. Returns (zip_bytes, company names)."""
-    vendors = await list_export_vendors(session, scope=scope)
+    """One file per company, packaged as ZIP. Returns (zip_bytes, company names)."""
+    all_vendors = await list_export_vendors(session, scope=scope)
+    if vendors:
+        wanted = set(vendors)
+        vendor_list = [v for v in all_vendors if v in wanted]
+        extra = [v for v in vendors if v not in vendor_list]
+        vendor_list.extend(extra)
+    else:
+        vendor_list = all_vendors
+
     buf = io.BytesIO()
     included: list[str] = []
+    ext = "xlsx" if fmt == "xlsx" else "csv"
 
     with zipfile.ZipFile(buf, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
-        for vendor in vendors:
+        for vendor in vendor_list:
             skills = await fetch_skills_for_export(
                 session,
                 vendor=vendor,
@@ -331,12 +342,32 @@ async def build_vendor_csv_bundle(
             if not skills:
                 continue
             filename = build_export_filename(
-                fmt="csv",
+                fmt=fmt,
                 vendor=vendor,
                 today_only=today_only,
                 recent_only=recent_only,
             )
-            zf.writestr(filename, rows_to_csv(skills))
+            content = rows_to_xlsx(skills) if fmt == "xlsx" else rows_to_csv(skills)
+            zf.writestr(filename, content)
             included.append(vendor)
 
     return buf.getvalue(), included
+
+
+async def build_vendor_csv_bundle(
+    session: AsyncSession,
+    *,
+    today_only: bool = False,
+    recent_only: bool = False,
+    scope: str = "domestic",
+    vendors: list[str] | None = None,
+) -> tuple[bytes, list[str]]:
+    """One CSV per company, packaged as ZIP. Returns (zip_bytes, company names)."""
+    return await build_vendor_bundle(
+        session,
+        today_only=today_only,
+        recent_only=recent_only,
+        scope=scope,
+        vendors=vendors,
+        fmt="csv",
+    )

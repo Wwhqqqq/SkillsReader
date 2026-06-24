@@ -20,9 +20,27 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import async_session_factory, get_db
 from app.core.redis_client import SCAN_EVENTS_CHANNEL, create_pubsub, get_official_scan_state
 from app.models import ScanEvent, Source
-from app.schemas import OfficialPortalOut, OfficialScanStatusOut, ScanEventOut, ScanTriggerRequest
+from app.schemas import (
+    OfficialPortalOut,
+    OfficialPortalSettingsUpdate,
+    OfficialScanStatusOut,
+    ScanEventOut,
+    ScanTriggerRequest,
+)
+from app.services.push.push_targets import (
+    add_push_recipient,
+    get_push_recipients,
+    remove_push_recipient,
+    set_push_recipients,
+)
 from app.services.scan.official_portals import official_portals_table
 from app.services.scan.official_scan import run_official_scan_batch
+from app.services.scan.portal_schedule import (
+    default_interval_sec,
+    get_official_portal_schedule,
+    official_interval_sec,
+    set_official_portal_schedule,
+)
 from app.services.scan.scanner import scan_source
 
 router = APIRouter(prefix="/api", tags=["scan"])
@@ -60,7 +78,38 @@ async def trigger_scan(body: ScanTriggerRequest):
 async def official_scan_status():
     """最近一次官方门户扫描的状态。"""
     state = await get_official_scan_state()
-    return OfficialScanStatusOut.model_validate(state)
+    interval = await official_interval_sec()
+    enriched = {
+        **state,
+        "interval_sec": interval,
+        "default_interval_sec": default_interval_sec(),
+    }
+    return OfficialScanStatusOut.model_validate(enriched)
+
+
+@router.get("/scan/official/settings")
+async def official_scan_settings():
+    """官方门户扫描调度与推送收件人配置。"""
+    schedule = await get_official_portal_schedule()
+    state = await get_official_scan_state()
+    recipients = await get_push_recipients()
+    return {
+        "interval_sec": schedule.get("interval_sec"),
+        "default_interval_sec": default_interval_sec(),
+        "min_interval_sec": 60,
+        "last_new_official_at": state.get("last_new_official_at"),
+        "official_new_dm_users": recipients.get("official_new_dm_users") or [],
+    }
+
+
+@router.put("/scan/official/settings")
+async def update_official_scan_settings(body: OfficialPortalSettingsUpdate):
+    """更新扫描间隔或官方新增推送单聊名单。"""
+    if body.interval_sec is not None:
+        await set_official_portal_schedule({"interval_sec": body.interval_sec})
+    if body.official_new_dm_users is not None:
+        await set_push_recipients({"official_new_dm_users": body.official_new_dm_users})
+    return await official_scan_settings()
 
 
 @router.get("/scan/official/portals", response_model=list[OfficialPortalOut])

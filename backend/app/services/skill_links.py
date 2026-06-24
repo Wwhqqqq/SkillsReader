@@ -7,6 +7,8 @@ from typing import Any
 
 CLAWHUB_SKILLS_BASE = "https://clawhub-skills.com/skills"
 CLAWHUB_AI_BASE = "https://clawhub.ai"
+# clawhub.ai/{slug} 对单段 slug 返回 404；需 /skills/{slug} 或 clawhub-skills.com
+_BROKEN_CLAWHUB_AI = re.compile(r"^https://clawhub\.ai/([^/?#]+)/?$", re.I)
 
 # RedSkill 目录把全部 136 个 skill 的 sourceUrl 指向同一篇 CSDN 盘点文章
 AGGREGATE_MIRROR_PATTERNS = (
@@ -26,7 +28,28 @@ def clawhub_skills_url(slug: str) -> str:
 
 
 def clawhub_ai_url(slug: str) -> str:
-    return f"{CLAWHUB_AI_BASE}/{slug.strip().lstrip('/')}"
+    slug = slug.strip().lstrip("/")
+    if "/" in slug:
+        return f"{CLAWHUB_AI_BASE}/{slug}"
+    return f"{CLAWHUB_AI_BASE}/skills/{slug}"
+
+
+def is_broken_clawhub_ai_url(url: str | None) -> bool:
+    """单段 slug 的 clawhub.ai 链接不可访问，如 https://clawhub.ai/xhs-cn。"""
+    if not url:
+        return False
+    return bool(_BROKEN_CLAWHUB_AI.match(url.strip()))
+
+
+def normalize_clawhub_detail_url(url: str | None, slug: str | None = None) -> str:
+    """将无效 ClawHub 链接规范为可访问的 per-skill 页。"""
+    raw = (url or "").strip()
+    if is_broken_clawhub_ai_url(raw):
+        part = slug or _BROKEN_CLAWHUB_AI.match(raw).group(1)  # type: ignore[union-attr]
+        return clawhub_skills_url(part)
+    if not raw and slug:
+        return clawhub_skills_url(slug)
+    return raw
 
 
 def _meta_dict(skill: Any) -> dict[str, Any]:
@@ -60,11 +83,15 @@ def resolve_skill_detail_url(skill: Any, *, default: str = "") -> str:
     url = (getattr(skill, "detail_url", None) or "").strip()
     slug = extract_skill_slug(skill)
     meta = _meta_dict(skill)
+    external_id = str(getattr(skill, "external_id", "") or "")
+
+    if is_broken_clawhub_ai_url(url):
+        return normalize_clawhub_detail_url(url, slug)
 
     if slug and (not url or is_aggregate_mirror_url(url)):
-        if meta.get("redskill") or meta.get("catalog") in ("redskill", "clawhub"):
+        if meta.get("redskill") or meta.get("redskill_catalog") or meta.get("catalog") in ("redskill", "clawhub"):
             return clawhub_skills_url(slug)
-        if (getattr(skill, "external_id", "") or "").startswith(("redskill:", "clawhub:")):
+        if external_id.startswith(("redskill:", "clawhub:")):
             return clawhub_skills_url(slug)
 
     if not url and slug:

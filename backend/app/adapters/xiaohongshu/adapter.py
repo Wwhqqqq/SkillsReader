@@ -25,6 +25,7 @@ from app.adapters.common.platform_filters import (
 )
 from app.adapters.common.record_utils import add_platform_record
 from app.adapters.common.skillsmp_catalog import fetch_skillsmp_for_vendor
+from app.adapters.xiaohongshu.catalog import fetch_clawhub_xiaohongshu
 from app.services.enrichment.vendor_relevance import PROMPT_VERSION, apply_vendor_relevance_split
 from app.services.skill_links import clawhub_skills_url, is_aggregate_mirror_url
 
@@ -134,7 +135,7 @@ class XiaohongshuSkillsAdapter(SourceAdapter):
                         "installs": item.get("installs"),
                         "risk": item.get("risk"),
                         "installCommand": install,
-                        "redskill": True,
+                        "redskill_catalog": True,
                         "catalog": "clawhub",
                         "clawhub": True,
                         "vendorRelevance": {
@@ -163,8 +164,8 @@ class XiaohongshuSkillsAdapter(SourceAdapter):
                     metadata={
                         "repo": repo,
                         "categoryName": "RedSkill 精选",
-                        "redskill": True,
-                        "catalog": "redskill",
+                        "redskill_catalog": True,
+                        "catalog": "github",
                         "installCommand": case.get("copy", ""),
                     },
                 )
@@ -266,6 +267,11 @@ class XiaohongshuSkillsAdapter(SourceAdapter):
             ):
                 self._add_record(records, seen, rec)
 
+            for rec in await fetch_clawhub_xiaohongshu(
+                client, source_id=self.source_id, vendor=self.vendor
+            ):
+                self._add_record(records, seen, rec)
+
         for entry in OFFICIAL_ENTRIES:
             rec = RawSkillRecord(
                 external_id=entry["external_id"],
@@ -282,41 +288,12 @@ class XiaohongshuSkillsAdapter(SourceAdapter):
         return await apply_vendor_relevance_split(self.vendor, records)
 
     async def fetch_official_portal(self) -> list[RawSkillRecord]:
-        """仅 redskill.org 官方目录 + 官方文档入口，不含 GitHub/SkillsMP。"""
+        """仅小红书官方说明入口（不含 redskill.org 社区目录 / GitHub / SkillsMP）。"""
         from app.adapters.common.official_entries import records_from_official_entries
 
-        records = records_from_official_entries(
+        return records_from_official_entries(
             source_id=self.source_id, vendor=self.vendor, entries=OFFICIAL_ENTRIES
         )
-        seen = {r.external_id for r in records}
-        timeout = httpx.Timeout(60.0, connect=20.0)
-        async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
-            catalog, _github_cases = await self._fetch_redskill_catalog(client)
-            for item in catalog:
-                slug = item.get("slug", "")
-                if not slug:
-                    continue
-                ext_id = f"redskill:{slug}"
-                if ext_id in seen:
-                    continue
-                category = item.get("category", "RED Skill")
-                desc = item.get("description", "") or f"RED Skill 官方目录 · {slug}"
-                install = item.get("installCommand", "")
-                if install:
-                    desc = f"{desc} · 安装: {install}"
-                detail_url = str(item.get("sourceUrl") or "").strip() or f"{REDSKILL_DIRECTORY_URL}#{slug}"
-                rec = RawSkillRecord(
-                    external_id=ext_id,
-                    name=str(item.get("name") or slug),
-                    vendor=self.vendor,
-                    source_id=self.source_id,
-                    raw_description=desc,
-                    detail_url=detail_url,
-                    tags=["小红书", "RED Skill", "官方"],
-                    metadata={"categoryName": category, "official": True, "catalog": "official"},
-                )
-                self._add_record(records, seen, rec)
-        return records
 
     async def _fetch_redskill_catalog(
         self, client: httpx.AsyncClient

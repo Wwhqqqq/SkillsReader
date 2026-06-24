@@ -11,6 +11,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import Source
 from app.services.scan.events import emit_event
+from app.services.scan.official_new_push import filter_official_new_ids, push_official_new_skills
+from app.services.scan.schedule_config import full_scan_push_official_new
 from app.services.scan.scanner import scan_source
 
 logger = logging.getLogger(__name__)
@@ -25,6 +27,8 @@ class FullScanBatchResult:
     sources_ok: int = 0
     sources_error: int = 0
     new_skill_ids: list[int] = field(default_factory=list)
+    new_official_skill_ids: list[int] = field(default_factory=list)
+    push_status: str | None = None
     error_message: str | None = None
 
 
@@ -72,7 +76,22 @@ async def run_full_scan_batch(session: AsyncSession) -> FullScanBatchResult:
                 )
 
         batch.new_skill_ids = list(dict.fromkeys(all_new))
+        batch.new_official_skill_ids = await filter_official_new_ids(
+            session, batch.new_skill_ids
+        )
         batch.finished_at = datetime.now(timezone.utc).replace(tzinfo=None)
+        if batch.new_official_skill_ids:
+            from app.core.redis_client import set_official_scan_state
+
+            await set_official_scan_state(
+                {"last_new_official_at": batch.finished_at.isoformat()}
+            )
+        if full_scan_push_official_new() and batch.new_official_skill_ids:
+            batch.push_status = await push_official_new_skills(
+                session,
+                batch.new_official_skill_ids,
+                source="full_scan",
+            )
         batch.status = "done"
         await emit_event(
             session,
@@ -80,12 +99,20 @@ async def run_full_scan_batch(session: AsyncSession) -> FullScanBatchResult:
             message=(
                 f"全量扫描完成：{batch.sources_ok}/{batch.sources_total} 成功，"
                 f"新增 {len(batch.new_skill_ids)} 条"
+                + (
+                    f"，官方新增 {len(batch.new_official_skill_ids)} 条"
+                    if batch.new_official_skill_ids
+                    else ""
+                )
+                + (f"，推送 {batch.push_status}" if batch.push_status else "")
             ),
             level="success",
             payload={
                 "sources_ok": batch.sources_ok,
                 "sources_error": batch.sources_error,
                 "new_count": len(batch.new_skill_ids),
+                "new_official_count": len(batch.new_official_skill_ids),
+                "push_status": batch.push_status,
             },
         )
     except Exception as exc:

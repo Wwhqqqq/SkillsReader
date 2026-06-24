@@ -30612,5 +30612,2474 @@
     "confidence": 0.95,
     "source": "llm",
     "prompt_version": "2"
+  },
+  "快手|clawhub:siluzan-tso": {
+    "relevant": false,
+    "reason": "多平台广告账户管理工具，并列支持Kwai等多个平台，非快手专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|clawhub:china-national-bidding-zhongguozhaobiao": {
+    "relevant": false,
+    "reason": "与哔哩哔哩生态无关，属于通用招标采购工具。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "拼多多|clawhub:taobao-competitor-analyzer": {
+    "relevant": false,
+    "reason": "核心用途是淘宝价格对比，并列支持京东、拼多多、唯品会等多平台，非拼多多专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:takeout-coupon": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan": {
+    "relevant": true,
+    "reason": "专门为美团本地生活决策设计，核心功能依赖美团链接和商家数据，去掉美团后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-hot-trend": {
+    "relevant": true,
+    "reason": "专门检索美团公开商家和优惠信息，核心功能依赖美团平台数据。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-ai": {
+    "relevant": true,
+    "reason": "专门提供美团商家搜索和对比分析，核心功能依赖美团数据。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-bike": {
+    "relevant": true,
+    "reason": "专门为美团单车出行设计，核心功能依赖美团单车服务。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-travel": {
+    "relevant": true,
+    "reason": "美团酒旅官方Skill，专门调用美团酒旅API，核心功能依赖美团平台。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-automation": {
+    "relevant": true,
+    "reason": "专门自动化操作美团App，核心功能依赖美团应用。",
+    "confidence": 0.96,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-coupon-order-assistant": {
+    "relevant": true,
+    "reason": "专门为美团优惠下单开发，核心功能依赖美团API，去掉美团后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-union-smart-recommendation-skill": {
+    "relevant": true,
+    "reason": "专门为美团联盟导购开发，推送美团业务会场链接，专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-union-coupon-skill": {
+    "relevant": true,
+    "reason": "专门为美团联盟优惠券开发，核心功能依赖美团，专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-travel-assistant": {
+    "relevant": true,
+    "reason": "专门为美团旅行开发，查询景点门票酒店机票，依赖美团API",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-coupon-auto": {
+    "relevant": true,
+    "reason": "专门为美团优惠券自动领取开发，核心功能依赖美团",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-coupon-get-tool": {
+    "relevant": true,
+    "reason": "专门为美团优惠领取开发，覆盖多品类，依赖美团官方账号",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-huisheng-coupon": {
+    "relevant": true,
+    "reason": "专门为美团优惠券领取设计，覆盖美团全品类，去掉美团后功能不成立",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-coupon-traffic": {
+    "relevant": true,
+    "reason": "美团官方出行助手，专门领取美团机票火车票优惠券，核心功能依赖美团",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-coupon": {
+    "relevant": true,
+    "reason": "美团官方红包助手，专门领取美团多品类优惠券，去掉美团后无意义",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-c-user-auth": {
+    "relevant": true,
+    "reason": "专门为美团C端用户提供认证工具，是美团生态专属API调用",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-waimai": {
+    "relevant": true,
+    "reason": "专门领取美团优惠券，核心功能依赖美团平台",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-waimai-coupon": {
+    "relevant": true,
+    "reason": "美团官方外卖红包助手，专门领取美团优惠券，去掉美团后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-takeout": {
+    "relevant": true,
+    "reason": "专门为美团外卖优惠券领取开发，依赖美团账号认证，去掉美团后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:meituan-coupons": {
+    "relevant": true,
+    "reason": "官方美团红包助手，专门领取美团多品类优惠券，内置美团认证，专属美团。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:obtain-takeout-coupon": {
+    "relevant": false,
+    "reason": "并列支持美团、淘宝、饿了么等多平台，属于多平台工具。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:china-local-life-assistant": {
+    "relevant": false,
+    "reason": "并列比较美团、饿了么、大众点评等多平台，非专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:maicai": {
+    "relevant": false,
+    "reason": "跨平台买菜比价，并列多多买菜、美团买菜、7FRESH等，非专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:grocery-price-comparer": {
+    "relevant": false,
+    "reason": "跨平台生鲜比价，并列盒马、叮咚、美团买菜等，非专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|clawhub:waimai-coupon": {
+    "relevant": true,
+    "reason": "专门为美团外卖优惠券领取开发的工具，依赖美团账号认证，核心功能与美团平台绑定。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun": {
+    "relevant": true,
+    "reason": "专门提供阿里云产品信息摘要，核心用途是阿里云官方数据查询，去掉阿里云后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-tts": {
+    "relevant": true,
+    "reason": "专门调用阿里云语音合成API，核心功能依赖阿里云服务。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-asr": {
+    "relevant": true,
+    "reason": "纯阿里云语音识别技能，核心用途是阿里云ASR，虽支持飞书但仍是阿里云专属。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-speech-transcriber": {
+    "relevant": true,
+    "reason": "专门使用阿里云DashScope语音服务进行转写，核心功能依赖阿里云。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:claw-aliyun-drive-uploader": {
+    "relevant": true,
+    "reason": "专门用于阿里云盘文件上传与管理，核心功能依赖阿里云盘API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-oss-upload": {
+    "relevant": true,
+    "reason": "专门用于阿里云OSS文件上传，核心功能依赖阿里云对象存储。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-dns-cli": {
+    "relevant": true,
+    "reason": "专门用于阿里云DNS记录管理，依赖aliyun-cli，去掉阿里云后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-cli-manage": {
+    "relevant": true,
+    "reason": "专门用于阿里云资源命令行操作，依赖阿里云CLI，去掉阿里云后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-unified-search": {
+    "relevant": true,
+    "reason": "专门调用阿里云统一搜索API，核心功能依赖阿里云服务",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-oss": {
+    "relevant": true,
+    "reason": "专门用于阿里云OSS文件上传，核心功能依赖阿里云服务",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-image-generator": {
+    "relevant": true,
+    "reason": "专门调用阿里云通义万相生成图片，核心功能依赖阿里云服务",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-search-1-0-0": {
+    "relevant": true,
+    "reason": "专门调用阿里云统一搜索API，核心功能依赖阿里云服务",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-skills": {
+    "relevant": true,
+    "reason": "专门用于通过阿里云CLI管理阿里云资源，核心用途是调用阿里云API，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-qwen-livetranslate": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio Qwen LiveTranslate模型进行实时语音翻译，核心功能依赖阿里云API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-adb-mysql": {
+    "relevant": true,
+    "reason": "专门管理阿里云AnalyticDB for MySQL，通过OpenAPI/SDK操作，核心用途是阿里云专属资源管理。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-oss-skill": {
+    "relevant": true,
+    "reason": "专门操作阿里云OSS对象存储，核心功能依赖阿里云API和CLI，去掉阿里云后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-cloudauth-verify": {
+    "relevant": true,
+    "reason": "专门管理阿里云ID Verification（Cloudauth），通过OpenAPI/SDK操作，核心用途是阿里云专属身份验证。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-pixverse-generation": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio PixVerse模型生成视频，核心功能依赖阿里云API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-ecs-skill": {
+    "relevant": true,
+    "reason": "专门管理阿里云ECS，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-anytrans-translate": {
+    "relevant": true,
+    "reason": "专门管理阿里云通义翻译API，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-animate-anyone": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio的AnimateAnyone，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-cdn-manage": {
+    "relevant": true,
+    "reason": "专门管理阿里云CDN，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-openclaw": {
+    "relevant": true,
+    "reason": "专门管理阿里云服务器上的OpenClaw网关，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-ccai-manage": {
+    "relevant": true,
+    "reason": "专门管理阿里云Contact Center AI，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-airec-manage": {
+    "relevant": true,
+    "reason": "专门管理阿里云AIRec推荐引擎资源，核心用途是调用阿里云OpenAPI/SDK，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-rds-supabase": {
+    "relevant": true,
+    "reason": "专门管理阿里云RDS Supabase实例，核心用途是调用阿里云OpenAPI，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-aicontent-generate": {
+    "relevant": true,
+    "reason": "专门管理阿里云AIContent内容生成服务，核心用途是调用阿里云OpenAPI/SDK，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-image": {
+    "relevant": true,
+    "reason": "专门调用阿里云百炼图像生成、编辑与翻译API，核心用途是阿里云专属服务，去掉阿里云后价值消失。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-web-search": {
+    "relevant": true,
+    "reason": "专门调用阿里云实时搜索（夸克引擎），核心用途是阿里云专属服务，去掉阿里云后价值消失。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-ai-guardrail": {
+    "relevant": true,
+    "reason": "专门安装配置阿里云AI Guardrail服务，核心用途是阿里云专属，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-mail": {
+    "relevant": true,
+    "reason": "专门调用阿里云企业邮件服务API，无其他平台支持",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-oss-2": {
+    "relevant": true,
+    "reason": "专门管理阿里云OSS存储桶，无其他平台支持",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-domain": {
+    "relevant": true,
+    "reason": "专门通过阿里云OpenAPI管理域名资产，无其他平台支持",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-qwen-image-edit": {
+    "relevant": true,
+    "reason": "专门调用阿里云通义系列图像编辑模型，无其他平台支持",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-use": {
+    "relevant": true,
+    "reason": "专门调用阿里云百炼LLM和翻译服务，无其他平台支持",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-qwen-vl": {
+    "relevant": true,
+    "reason": "专门调用阿里云通义VL模型进行图像理解，无其他平台支持",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-qwen-omni": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio Qwen Omni多模态模型API，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-qwen-text-embedding": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio文本嵌入模型API，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-qwen-tts": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio DashScope TTS语音合成API，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-oss-ossutil": {
+    "relevant": true,
+    "reason": "专门用于阿里云OSS命令行工具安装配置操作，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-ice-manage": {
+    "relevant": true,
+    "reason": "专门管理阿里云智能媒体编辑ICE工作流，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-wan-digital-human": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio数字人生成模型，去掉阿里云后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-wan-edit": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio Wan视频编辑模型，核心用途为阿里云专属API，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-dashvector-search": {
+    "relevant": true,
+    "reason": "专门使用阿里云DashVector向量检索Python SDK，核心功能为阿里云专属服务。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-zimage-turbo": {
+    "relevant": true,
+    "reason": "专门调用阿里云Model Studio Z-Image Turbo图像生成API，核心用途为阿里云专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-cosyvoice-voice-clone": {
+    "relevant": true,
+    "reason": "专门使用阿里云Model Studio CosyVoice语音克隆模型，核心功能为阿里云专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-green-moderation": {
+    "relevant": true,
+    "reason": "专门管理阿里云内容安全（Green）服务，核心用途为阿里云专属API操作。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-bdrc-backup": {
+    "relevant": true,
+    "reason": "专门管理阿里云备份与容灾中心（BDRC），核心用途为阿里云专属API操作。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-fc-serverless-devs": {
+    "relevant": true,
+    "reason": "专门用于阿里云函数计算（FC）的CLI快速启动和Serverless Devs配置指导，核心用途是调用阿里云API，去掉阿里云后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-vod-manage": {
+    "relevant": true,
+    "reason": "专门管理阿里云ApsaraVideo VOD资源和工作流，通过OpenAPI/SDK操作，核心功能依赖阿里云。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-iqs-search": {
+    "relevant": true,
+    "reason": "专门调用阿里云信息查询服务（IQS）的UnifiedSearch API进行联网搜索，核心用途是阿里云API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-sls-query": {
+    "relevant": true,
+    "reason": "专门调用阿里云日志服务CLI查询日志，核心功能依赖阿里云SLS。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:aliyun-log-query": {
+    "relevant": true,
+    "reason": "专门查询阿里云日志（SLS），核心功能依赖阿里云。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:taobao-monthsale-query": {
+    "relevant": true,
+    "reason": "专门查询阿里平台（淘宝/天猫）商品月销量，核心用途是阿里系平台数据，去掉阿里后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:taobao-detail-query": {
+    "relevant": true,
+    "reason": "专门查询阿里平台（淘宝/天猫）商品详情，核心用途是调用阿里系API，去掉阿里后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:ailiyun-yunxiao-mr-deploy": {
+    "relevant": true,
+    "reason": "专门针对阿里云云效的MR创建、发布和通知，核心功能依赖阿里云云效API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:yunxiao-mcp": {
+    "relevant": true,
+    "reason": "专门对接阿里云云效，查询或更新工作项等，核心用途是阿里云云效API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:dashscope-web-search": {
+    "relevant": true,
+    "reason": "使用DashScope Qwen进行网页搜索，核心依赖阿里DashScope API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:dashscope-web-search-feishu": {
+    "relevant": true,
+    "reason": "使用DashScope Qwen进行网页搜索，优化飞书，但核心仍是阿里DashScope API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:dashscope-image-gen": {
+    "relevant": true,
+    "reason": "通过阿里DashScope端点生成图片，核心依赖阿里API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:alibaba-dashscope-local": {
+    "relevant": true,
+    "reason": "专门为阿里云百炼提供商配置，核心用途是阿里云专属交互流程，去掉阿里云后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:dashscope-llm": {
+    "relevant": true,
+    "reason": "核心用途是调用阿里云DashScope的OpenAI兼容API，专门为阿里生态开发。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:dashscope-imagegen": {
+    "relevant": true,
+    "reason": "使用DashScope/通义万相模型生成图像，专门为阿里生态开发。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:web-search-dashscope": {
+    "relevant": false,
+    "reason": "使用Serper API进行通用网络搜索，DashScope仅出现在名称中，核心功能与阿里无关。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:openclaw-dashscope-kimi2-5-vision": {
+    "relevant": false,
+    "reason": "使用Kimi K2.5模型，虽提及阿里百炼但核心是Kimi，非阿里专属。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:paperbanana-dashscope": {
+    "relevant": true,
+    "reason": "使用阿里云DashScope多智能体管线生成学术图表，专门为阿里生态开发。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:tuzi-nano-banana": {
+    "relevant": false,
+    "reason": "并列支持多个平台（Tuzi、Gemini、OpenAI、DashScope、Replicate），非阿里专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:pet-emotion": {
+    "relevant": true,
+    "reason": "核心功能基于DashScope多模态大模型，去掉阿里后价值不复存在",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|clawhub:flower-care": {
+    "relevant": true,
+    "reason": "核心功能基于DashScope多模态大模型，去掉阿里后价值不复存在",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine": {
+    "relevant": true,
+    "reason": "专门为火山引擎云基础设施开发，核心用途是部署和管理火山引擎资源，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-compute-function": {
+    "relevant": true,
+    "reason": "专门针对火山引擎函数计算服务，核心功能是部署和管理函数计算工作负载，去掉厂商名称后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-compute-ecs": {
+    "relevant": true,
+    "reason": "专门管理火山引擎ECS实例，核心用途是云服务器运维，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-cli": {
+    "relevant": true,
+    "reason": "专门使用火山引擎CLI管理云资源，核心功能依赖火山引擎服务，去掉厂商名称后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-image-generation": {
+    "relevant": true,
+    "reason": "专门基于火山引擎AI服务进行图像生成，核心用途是调用火山引擎AI能力，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-database-rds": {
+    "relevant": true,
+    "reason": "专门操作火山引擎RDS实例，核心功能是数据库运维，去掉厂商名称后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-video-generation": {
+    "relevant": true,
+    "reason": "专门调用火山引擎AI视频生成API，核心用途为火山引擎专属工作流，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-audio-tts": {
+    "relevant": true,
+    "reason": "专门调用火山引擎语音服务TTS，核心用途为火山引擎专属，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-video": {
+    "relevant": true,
+    "reason": "专门调用火山引擎API生成AI视频，核心用途为火山引擎专属，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-misc-model-discovery": {
+    "relevant": true,
+    "reason": "专门发现和路由火山引擎AI模型能力，核心用途为火山引擎专属，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-security-kms": {
+    "relevant": true,
+    "reason": "专门调用火山引擎KMS密钥管理服务，核心用途为火山引擎专属，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:day253-volcengine-ai-audio-tts": {
+    "relevant": true,
+    "reason": "专门调用火山引擎语音服务TTS，核心用途为火山引擎专属，去掉厂商名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-storage-tos": {
+    "relevant": true,
+    "reason": "专门为火山引擎TOS对象存储开发，核心用途是调用其API进行存储操作，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-documentation": {
+    "relevant": true,
+    "reason": "专门查询火山引擎官方文档，涵盖全部产品，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-api": {
+    "relevant": true,
+    "reason": "专门查询火山引擎API规范，核心用途是调用其API，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-network-dns": {
+    "relevant": true,
+    "reason": "专门管理火山引擎网络服务的DNS记录，核心用途是调用其API，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-search-rag": {
+    "relevant": true,
+    "reason": "专门用于火山引擎AI栈的检索和RAG工作流，核心用途是调用其API，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai": {
+    "relevant": true,
+    "reason": "专门调用火山引擎方舟的AI能力，核心用途是调用其API，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-vefaas": {
+    "relevant": true,
+    "reason": "专门为火山引擎 veFaaS 开发，核心用途是部署和管理 serverless 应用，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-doubao-image-gen": {
+    "relevant": true,
+    "reason": "专门使用火山引擎 API 生成图片和视频，核心功能依赖字节系平台。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-tts-feishu": {
+    "relevant": true,
+    "reason": "专门调用火山引擎豆包语音合成模型，且支持飞书发送，核心用途依赖字节系平台。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-sdk-generator": {
+    "relevant": true,
+    "reason": "专门生成火山引擎 SDK 示例，核心功能依赖火山引擎 API Explorer。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-web-search-online": {
+    "relevant": true,
+    "reason": "专门调用火山引擎联网搜索接口，核心功能依赖火山引擎。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-deploy": {
+    "relevant": true,
+    "reason": "专门部署项目到火山引擎，核心功能依赖火山引擎服务。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-text-ark-chat": {
+    "relevant": true,
+    "reason": "专门调用火山引擎 ARK 文本模型，去掉厂商名称后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-rds-mysql": {
+    "relevant": true,
+    "reason": "专门管理火山引擎 RDS MySQL，去掉厂商名称后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-prepare": {
+    "relevant": true,
+    "reason": "专门部署到火山引擎，去掉厂商名称后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-iac": {
+    "relevant": true,
+    "reason": "专门管理火山引擎资源，去掉厂商名称后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-entry-ark": {
+    "relevant": true,
+    "reason": "专门用于火山引擎 ARK 模型调用和路由，去掉厂商名称后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-rds-postgresql": {
+    "relevant": true,
+    "reason": "专门管理火山引擎 RDS PostgreSQL，去掉厂商名称后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-troubleshooting": {
+    "relevant": true,
+    "reason": "专门用于排查火山引擎错误，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-knowledge-search": {
+    "relevant": true,
+    "reason": "专门检索火山引擎官方文档，核心用途与厂商绑定",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-db-supabase": {
+    "relevant": true,
+    "reason": "管理火山引擎Supabase数据库工作空间，专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-video-studio": {
+    "relevant": true,
+    "reason": "基于火山引擎/ARK的视频生成，去掉厂商后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-image-studio": {
+    "relevant": true,
+    "reason": "基于火山引擎/ARK的图像生成，专属工作流",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:day253-volcengine-storage-tos": {
+    "relevant": true,
+    "reason": "专门操作火山引擎TOS对象存储，厂商专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:day253-volcengine-storage-tos-test": {
+    "relevant": true,
+    "reason": "专门为Volcengine TOS开发的测试工具，核心用途是验证Volcengine TOS的AK/SK配置、列举桶、上传下载，去掉Volcengine后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-landing-zone": {
+    "relevant": true,
+    "reason": "专门为Volcengine Landing Zone设计，核心用途是分析、咨询、设置、管理、配置或设计Volcengine Landing Zone，去掉Volcengine后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-agent-identity": {
+    "relevant": true,
+    "reason": "专门为Volcengine Agent Identity设计，核心用途是UserPool登录、TIP token、凭证托管和工具风险审批，去掉Volcengine后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-tos-vectors-skills": {
+    "relevant": true,
+    "reason": "专门为Volcengine TOS Vectors服务设计，核心用途是管理向量存储和相似性搜索，去掉Volcengine后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-stt": {
+    "relevant": true,
+    "reason": "专门为Volcengine/ARK语音转文字API设计，核心用途是使用Volcengine STT替代Whisper/OpenAI STT，去掉Volcengine后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-web-search": {
+    "relevant": true,
+    "reason": "专门为Volcengine web_search脚本设计，核心用途是使用Volcengine进行网页搜索，去掉Volcengine后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ai-mediakit": {
+    "relevant": true,
+    "reason": "专门调用火山引擎AI MediaKit API进行音视频处理，去掉火山引擎后功能不成立",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-rtc-device-control": {
+    "relevant": true,
+    "reason": "专门控制火山引擎RTC设备，去掉火山引擎后无意义",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:seedream-volcengine": {
+    "relevant": true,
+    "reason": "专门使用火山引擎Seedream模型生成/编辑图像，去掉火山引擎后功能不成立",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-video-generate": {
+    "relevant": true,
+    "reason": "专门调用火山引擎视频生成脚本，去掉火山引擎后功能不成立",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-observability-cls": {
+    "relevant": true,
+    "reason": "专门使用火山引擎CLS进行日志查询和故障排查，去掉火山引擎后功能不成立",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-image-generate": {
+    "relevant": true,
+    "reason": "专门调用火山引擎图像生成脚本，去掉火山引擎后功能不成立",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcengine-ark-web-search": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎ARK Responses API获取网络搜索结果，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:day253-volcengine-agent-tts-to-tos": {
+    "relevant": true,
+    "reason": "专门使用火山引擎TTS和TOS服务，生成可分享音频链接，去掉火山引擎后功能不可用。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:feishu-room-booking": {
+    "relevant": true,
+    "reason": "专门为字节内部飞书会议室预订开发，依赖飞书API，去掉字节后无价值。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:bytedance-organization-framework": {
+    "relevant": false,
+    "reason": "属于字节跳动组织方法论的知识总结，非开发工具或API调用，不符合收录标准。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao": {
+    "relevant": false,
+    "reason": "整理豆包大模型公开信息，属于信息汇总，非调用字节API或专属工具。",
+    "confidence": 0.85,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-launch": {
+    "relevant": false,
+    "reason": "启动豆包桌面应用并配置翻译窗口，属于桌面应用启动器，非开发工具或API调用。",
+    "confidence": 0.85,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-image-video": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎Ark接口生成图片和视频，去掉豆包/火山引擎后功能不成立，且为字节专属API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-chat": {
+    "relevant": true,
+    "reason": "核心用途是调用豆包大模型API进行对话，去掉豆包后功能不成立，且为字节专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-capture": {
+    "relevant": false,
+    "reason": "通用工具，用于捕获豆包翻译结果，但核心是自动化抓取，非调用字节API或专属开发工具，去掉豆包后仍可捕获其他翻译结果。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-img": {
+    "relevant": true,
+    "reason": "核心用途是调用豆包AI图像生成API，去掉豆包后功能不成立，且为字节专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:huangm-doubao-media": {
+    "relevant": false,
+    "reason": "通用抓包工具，通过浏览器Cookie调用豆包接口，但核心是媒体提取与抓包，非字节专属开发工具，去掉豆包后仍可抓取其他网页。",
+    "confidence": 0.4,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-image-openclaw": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎豆包图片生成API，去掉豆包/火山引擎后功能不成立，且为字节专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-seed-skill": {
+    "relevant": true,
+    "reason": "专门调用字节跳动豆包视觉大模型，核心用途为字节专属API，去掉字节后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-asr": {
+    "relevant": true,
+    "reason": "专门调用字节/火山引擎豆包语音识别模型，核心用途为字节专属API。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-skill-v2": {
+    "relevant": true,
+    "reason": "专门调用火山引擎ARK API，核心用途为字节专属，去掉字节后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:vwu-doubao": {
+    "relevant": false,
+    "reason": "通过vwu.ai平台调用豆包模型，vwu.ai是第三方聚合平台，非字节专属。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-image-gen": {
+    "relevant": false,
+    "reason": "描述实际为智谱web搜索API，与豆包无关，关键词误匹配。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-api-toolkit": {
+    "relevant": true,
+    "reason": "专门调用火山引擎ARK API，核心用途为字节专属，去掉字节后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-media": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎ARK的文生图、文生视频API，去掉豆包/火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-copywriter": {
+    "relevant": false,
+    "reason": "调用豆包AI生成文案，但目标平台包括小红书、公众号、抖音，属于多平台工具，非字节专属。",
+    "confidence": 0.75,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-image-auto": {
+    "relevant": true,
+    "reason": "通过浏览器自动化操作豆包AI创作页，专门为豆包平台设计，去掉豆包后无价值。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-seedream-seedance-skill": {
+    "relevant": true,
+    "reason": "提供火山引擎API接口，核心功能是调用字节系API，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-seedream-skill": {
+    "relevant": true,
+    "reason": "专门调用火山引擎Seedream图片生成API，去掉火山引擎后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-tts": {
+    "relevant": true,
+    "reason": "使用豆包（火山引擎）语音合成API，核心功能依赖字节系服务，去掉后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-seedance-skill": {
+    "relevant": true,
+    "reason": "专门调用火山引擎 Seedance 视频生成 API，核心用途为字节专属 API 调用，去掉字节名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:sjht-doubao-image-gen": {
+    "relevant": true,
+    "reason": "使用豆包 Seedream 模型文生图，核心功能依赖字节模型，去掉字节名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:geo-analysis-doubao": {
+    "relevant": true,
+    "reason": "分析品牌在豆包/火山引擎 Ark 模型中的表现，核心用途为字节生态专属分析工具。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:byted-las-pdf-parse-doubao": {
+    "relevant": true,
+    "reason": "使用火山引擎 LAS 豆包 AI 模型解析 PDF，核心功能依赖字节模型。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-tts-cn": {
+    "relevant": true,
+    "reason": "基于火山引擎 V3 异步长文本合成接口，核心用途为字节专属 TTS API 调用。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:dlazy-doubao-tts": {
+    "relevant": true,
+    "reason": "使用豆包 TTS 合成语音，核心功能依赖字节模型。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:zhuchenggong-doubao-image-gen": {
+    "relevant": true,
+    "reason": "专门调用豆包AI图片生成API，核心用途为字节专属，去掉豆包后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-skill": {
+    "relevant": true,
+    "reason": "明确使用ByteDance/Doubao (Volcengine ARK) API，字节专属开发工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-maliang-image-gen": {
+    "relevant": true,
+    "reason": "通过火山引擎ARK调用豆包Seedream模型，字节专属，去掉豆包后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-seedream-gen": {
+    "relevant": true,
+    "reason": "调用豆包Seedream模型，依赖火山引擎，字节专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:yy756127197-doubao-image": {
+    "relevant": true,
+    "reason": "使用字节跳动豆包SeeDream模型，核心功能为字节专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-web-image": {
+    "relevant": true,
+    "reason": "调用豆包Web图像生成功能，核心用途为字节专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-tts-http": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎豆包TTS API，去掉字节后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-podcast": {
+    "relevant": true,
+    "reason": "专门调用字节豆包播客TTS API，处理WebSocket二进制帧等专属功能",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:sk-doubao-seedream": {
+    "relevant": true,
+    "reason": "核心用途是调用火山方舟Seedream系列模型，字节专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-opencli": {
+    "relevant": true,
+    "reason": "专门为豆包AI助手开发的OpenCLI技能包，调用豆包对话、播客生成等专属功能",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-ai-toolkit": {
+    "relevant": true,
+    "reason": "字节跳动豆包AI工具包，调用字节系AI能力，去掉字节后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-video-analyzer": {
+    "relevant": true,
+    "reason": "使用豆包2.0模型解析视频，字节专属模型",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:call-doubao1-5-llm": {
+    "relevant": true,
+    "reason": "专门调用豆包1.5大模型，核心用途是调用字节系API，去掉豆包后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-ai-image": {
+    "relevant": true,
+    "reason": "通过豆包网页界面生成图像，核心用途是字节系产品自动化，去掉豆包后价值消失。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubaochatobtain": {
+    "relevant": true,
+    "reason": "专门读取豆包对话页面内容，核心用途是字节系产品工具，去掉豆包后价值消失。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubaoimages": {
+    "relevant": true,
+    "reason": "通过豆包网页聊天生成图像，核心用途是字节系产品自动化，去掉豆包后价值消失。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-image": {
+    "relevant": true,
+    "reason": "使用火山引擎豆包模型API生成图片，核心用途是调用字节系API，去掉火山引擎后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-all-in-one": {
+    "relevant": true,
+    "reason": "使用豆包（火山引擎Ark）生成图片或视频，核心用途是字节系产品，去掉豆包后价值消失。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-ata-subtitle": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎ATA API生成字幕，去掉火山引擎后功能不存在，专属字节生态。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-video-creator": {
+    "relevant": true,
+    "reason": "基于火山引擎豆包视频生成模型，专属字节系产品，去掉后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-creative-design": {
+    "relevant": true,
+    "reason": "描述中明确基于豆包（字节系）进行图片生成编辑，专属字节生态。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-automation": {
+    "relevant": true,
+    "reason": "专门自动化操作豆包AI（字节系），去掉豆包后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:doubao-batch-video": {
+    "relevant": true,
+    "reason": "基于豆包网页端批量生成视频，专属字节生态。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:delonix-coze-cli": {
+    "relevant": true,
+    "reason": "专门与扣子Coze CLI交互，扣子是字节系产品，去掉后功能不存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:ai-agent-wars": {
+    "relevant": false,
+    "reason": "多平台对比分析，非字节专属开发工具",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volc-image": {
+    "relevant": true,
+    "reason": "专门调用火山引擎方舟API生成图片，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:volcano-engine-podcast": {
+    "relevant": true,
+    "reason": "专门使用火山引擎豆包语音播客API，去掉后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|clawhub:xqx-image-generator": {
+    "relevant": true,
+    "reason": "专门使用火山引擎Ark进行文生图，去掉后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbook-cards-skill": {
+    "relevant": false,
+    "reason": "人物语录/认知类内容，非平台开发 Skill",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-hot-trend": {
+    "relevant": false,
+    "reason": "通用搜索分析工具，非小红书专属API或自动化工作流，去掉小红书名称后仍可分析其他平台。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshucreator": {
+    "relevant": true,
+    "reason": "专门为小红书平台生成优化笔记内容，核心功能依赖小红书风格，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-deep-research": {
+    "relevant": false,
+    "reason": "通用研究工具，可应用于任何主题，小红书仅为示例，非专属。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-cn": {
+    "relevant": false,
+    "reason": "通用分析工具，描述中提及Instagram中国版，非小红书专属API或自动化。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-search": {
+    "relevant": true,
+    "reason": "专门搜索小红书公开笔记，依赖小红书平台内容，去掉小红书后功能不成立。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-browser": {
+    "relevant": true,
+    "reason": "专门浏览小红书并截图，核心功能依赖小红书平台，去掉小红书后无意义。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-editor-pick": {
+    "relevant": false,
+    "reason": "仅为小红书平台提供文案风格，不涉及API调用或专属自动化工作流，去掉小红书名称后价值仍存在。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-hotspot-writer1": {
+    "relevant": false,
+    "reason": "文案生成工具，非小红书专属API或开发者工具，去掉小红书名称后仍可作为通用热点文案助手。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:fox-xiaohongshu-publish": {
+    "relevant": true,
+    "reason": "专门用于小红书创作服务平台发布长文笔记，调用小红书专属发布功能，去掉小红书后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-search-cn": {
+    "relevant": true,
+    "reason": "专门搜索小红书公开笔记，提取数据用于市场调研，核心功能依赖小红书平台内容。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-search-summarizer": {
+    "relevant": true,
+    "reason": "专门搜索小红书并总结内容，核心功能依赖小红书平台。",
+    "confidence": 0.88,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-auto-poster": {
+    "relevant": true,
+    "reason": "专门用于小红书自动发帖，包含MCP配置和自动化工作流，去掉小红书后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-founder-growth-writer": {
+    "relevant": false,
+    "reason": "内容创作工具，非调用小红书API或专属自动化工作流，去掉小红书名称后价值仍存在。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-title": {
+    "relevant": false,
+    "reason": "通用标题优化工具，非小红书专属，去掉名称后仍可用于其他平台。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-post-analyzer": {
+    "relevant": false,
+    "reason": "内容分析工具，非调用小红书API，去掉名称后仍可分析其他平台内容。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:openclaw-xiaohongshu-mcp": {
+    "relevant": true,
+    "reason": "专门为小红书MCP工作流开发，支持搜索、发布、评论等API操作，去掉小红书名称后价值不复存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-content": {
+    "relevant": false,
+    "reason": "内容创作模板工具，非调用小红书API或专属自动化，去掉名称后仍可用于其他平台。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-create": {
+    "relevant": false,
+    "reason": "定制化创作技能，描述模糊，未明确调用小红书API，去掉名称后价值可能仍存在。",
+    "confidence": 0.4,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-copy": {
+    "relevant": true,
+    "reason": "专门为小红书平台生成文案，核心用途是小红书专属内容创作，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-analyzer": {
+    "relevant": true,
+    "reason": "专门分析小红书笔记和爆文，核心功能依赖小红书平台数据，去掉小红书后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-ad-ops": {
+    "relevant": true,
+    "reason": "专门优化小红书广告工作流，核心用途是小红书广告投放，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-research-kit": {
+    "relevant": true,
+    "reason": "专门提取和分析小红书内容，使用特定工具针对小红书，去掉小红书后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-collector": {
+    "relevant": true,
+    "reason": "专门收集小红书帖子/评论，涉及小红书特有流程，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-keyword-collector": {
+    "relevant": true,
+    "reason": "专门从小红书搜索页收集关键词，核心功能依赖小红书平台，去掉小红书后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-mcp-publisher": {
+    "relevant": true,
+    "reason": "专门为小红书自动化发布流程设计，核心功能依赖小红书API，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:fox-xiaohongshu-title": {
+    "relevant": false,
+    "reason": "通用标题优化工具，未提及小红书API或专属功能，仅关键词命中。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:qf-xiaohongshu-writer": {
+    "relevant": true,
+    "reason": "专门生成小红书风格笔记，核心用途依赖小红书平台内容结构，去掉小红书后价值消失。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-first-line": {
+    "relevant": false,
+    "reason": "社交破冰工具，虽使用小红书公开内容但核心功能不依赖小红书API或专属自动化，属于通用社交辅助。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-search-mcp": {
+    "relevant": true,
+    "reason": "专门搜索小红书笔记，通过whatson.red MCP端点提供结构化搜索结果，核心功能依赖小红书数据。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-skill": {
+    "relevant": true,
+    "reason": "小红书全功能工具，涵盖搜索、发布、互动等，核心用途依赖小红书API，去掉小红书后价值消失。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-ops": {
+    "relevant": true,
+    "reason": "专门为小红书全链路运营开发，去掉小红书后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-skills": {
+    "relevant": true,
+    "reason": "小红书自动化技能集合，专属平台操作",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-writing": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款内容，去小红书后无意义",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-aio": {
+    "relevant": true,
+    "reason": "基于小红书API接口，专属发布与管理",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:maxhub-xiaohongshu": {
+    "relevant": true,
+    "reason": "通过MaxHub API专门分析小红书数据，专属工具",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:easy-xiaohongshu": {
+    "relevant": true,
+    "reason": "生成小红书图文并辅助发布，专属平台",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-cli": {
+    "relevant": true,
+    "reason": "专门用于小红书所有操作（搜索、阅读、互动等），去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-full-auto": {
+    "relevant": true,
+    "reason": "全链路自动化自媒体工作流，专门针对小红书内容创作和发布，专属性强。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-extract": {
+    "relevant": true,
+    "reason": "专门从小红书URL提取元数据，核心功能依赖小红书平台。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-viral-content": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款文案，基于小红书热门模板，专属性强。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-image-generator": {
+    "relevant": true,
+    "reason": "专门生成小红书配图，使用小红书风格设计，核心用途为小红书内容创作。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-ai": {
+    "relevant": true,
+    "reason": "专门生成小红书宣传图和笔记，仅在用户要求发布到小红书时执行，专属性强。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-assistant-operator": {
+    "relevant": true,
+    "reason": "专门为小红书创作者自动化内容创作、发布、营销和互动，去掉小红书后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:huo15-xiaohongshu": {
+    "relevant": true,
+    "reason": "专门用于小红书内容写作、分析和改进，核心功能依赖小红书平台",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-image-gen": {
+    "relevant": true,
+    "reason": "专门为小红书赛道生成图片，去掉小红书后价值消失",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-longpost-auto": {
+    "relevant": true,
+    "reason": "专门自动化小红书长文发布流程，包括登录、分段、配图、标签等，专属平台",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-publish-kit": {
+    "relevant": true,
+    "reason": "专门为小红书发布内容的完整工具包，去掉小红书后无意义",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-card-creator": {
+    "relevant": true,
+    "reason": "专门将小红书文案转换为HTML卡片，核心用途依赖小红书内容格式",
+    "confidence": 0.88,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-mcp-openclaw": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发，核心功能是搜索笔记、看详情、抓评论等，去掉小红书后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-mcp-node-skill": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发，通过MCP协议操作小红书，支持内容发布、搜索、互动等完整功能",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-cn": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发，自动化运营工具，支持搜索、查看、发布等，去掉小红书后无意义",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshutools": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发，数据采集和互动工具包，核心功能依赖小红书API",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-mcp": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发，自动化运营工具，支持搜索、查看、发布等，去掉小红书后无意义",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-content-automation": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发，内容创作自动化工作流，从选题到发布一站式，去掉小红书后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:zhuchenggong-xiaohongshu-create": {
+    "relevant": true,
+    "reason": "技能名称和描述明确指向小红书定制化创作，核心用途是小红书专属自动化流程，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-crawler": {
+    "relevant": true,
+    "reason": "专门爬取小红书笔记和评论，依赖小红书平台数据，去掉小红书后功能不成立。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-mcporter-publish": {
+    "relevant": true,
+    "reason": "专门用于小红书创作者平台发帖，核心功能是小红书专属发布流程。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-publish": {
+    "relevant": true,
+    "reason": "专门用于小红书网页版创作服务平台发布长文笔记，核心用途是小红书专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:openclaw-xiaohongshu": {
+    "relevant": true,
+    "reason": "专门管理小红书内容与账号，提供发布、编辑、数据等核心功能，去掉小红书后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbook-image-generator": {
+    "relevant": true,
+    "reason": "专门为小红书文章生成配图，核心用途是小红书专属，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-big-text-post": {
+    "relevant": false,
+    "reason": "核心是AI生成配图并通过飞书发出，未调用小红书API或专属自动化发布，仅输出到本地/飞书，非小红书生态专属工具。",
+    "confidence": 0.15,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-writer-expert": {
+    "relevant": false,
+    "reason": "仅生成文案和配图描述，不涉及调用小红书API或发布到平台，属于通用内容生成工具。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-operation-assistant": {
+    "relevant": true,
+    "reason": "专门获取小红书官方账号笔记、热点话题，并对小红书账号和笔记进行打分评价，核心功能依赖小红书平台数据。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-daily-ranking": {
+    "relevant": true,
+    "reason": "专门追踪小红书各领域每日趋势、热门笔记，核心功能依赖小红书平台数据。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-report": {
+    "relevant": false,
+    "reason": "搜索小红书热帖的同时还搜索头部媒体资讯和Twitter/X推文，是多源交叉验证的通用舆情工具，非小红书专属。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-auto-publisher-pro": {
+    "relevant": true,
+    "reason": "专门定时生成内容、自动排版并发布到小红书平台，核心功能依赖小红书发布API。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-publish-wangzh": {
+    "relevant": true,
+    "reason": "专门为小红书长文笔记发布设计，核心功能依赖小红书平台，去掉小红书后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:zaizai-xhs-affiliate": {
+    "relevant": true,
+    "reason": "专门针对小红书种草带货，包括选品、文案、佣金变现，核心功能依赖小红书生态。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:tina-creator": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款笔记，使用小红书特定格式和风格，核心功能依赖小红书平台。",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-article-generator": {
+    "relevant": true,
+    "reason": "专门生成小红书风格的图文内容，核心功能依赖小红书平台。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:hemophilia-xiaohongshu-creator": {
+    "relevant": true,
+    "reason": "专门为小红书内容创作，生成小红书格式图文，核心功能依赖小红书平台。",
+    "confidence": 0.91,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-breaking-rankings": {
+    "relevant": true,
+    "reason": "专门挖掘小红书低粉爆款笔记数据，核心功能依赖小红书平台。",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-copywriter-redfox": {
+    "relevant": true,
+    "reason": "专为小红书内容创作，依赖小红书爆款笔记数据，脱离小红书无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-content-creator": {
+    "relevant": true,
+    "reason": "专门生成小红书平台内容，针对CES算法，脱离小红书无意义",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-prohibited-word": {
+    "relevant": true,
+    "reason": "专门检测小红书违禁词，功能与小红书平台绑定",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:miya-rednote-writer": {
+    "relevant": true,
+    "reason": "名称和描述明确针对小红书，热点追踪、文案生成、标签推荐均为小红书专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-expert": {
+    "relevant": true,
+    "reason": "专业采集小红书数据，功能完全依赖小红书平台",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-rank-tracker": {
+    "relevant": true,
+    "reason": "小红书账号榜单追踪，脱离小红书无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-top-account": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发的账号榜单追踪分析工具，核心功能依赖小红书数据，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-weekly-ranking": {
+    "relevant": true,
+    "reason": "专注于小红书平台的内容趋势分析，核心功能依赖小红书热门笔记数据，去掉小红书后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:mimo-xiaohongshu-copywriter": {
+    "relevant": true,
+    "reason": "专门生成小红书风格文案，核心用途是小红书笔记创作，去掉小红书后主要价值不复存在。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-login": {
+    "relevant": true,
+    "reason": "专门用于小红书 MCP 登录流程，核心功能依赖小红书登录接口，去掉小红书后无价值。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:slfcys-xhs-expert": {
+    "relevant": true,
+    "reason": "专注小红书文案创作与改写，核心用途是小红书平台内容，去掉小红书后主要价值消失。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-viral-copy-ai": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款文案，核心功能针对小红书平台优化，去掉小红书后价值不复存在。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-transfer": {
+    "relevant": false,
+    "reason": "跨平台搬运，非小红书专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-publish-auto": {
+    "relevant": true,
+    "reason": "专门为小红书自动发布开发，依赖小红书平台",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-viral-writer": {
+    "relevant": false,
+    "reason": "内容生成工具，不调用小红书API或专属自动化工作流",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-mcp-patch": {
+    "relevant": true,
+    "reason": "专门修复小红书MCP部署问题，依赖小红书生态",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-content-analytics": {
+    "relevant": true,
+    "reason": "专门用于小红书内容分析，调用小红书API",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-auto-publish-macos": {
+    "relevant": true,
+    "reason": "专门为小红书自动发布开发，依赖小红书平台",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-daily-breaking": {
+    "relevant": false,
+    "reason": "该技能是内容分析工具，追踪热门笔记和趋势，不涉及调用小红书API或专属自动化工作流，去掉小红书名称后仍可作为通用内容分析工具存在。",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:qqyougitcom-xhs-data-api": {
+    "relevant": false,
+    "reason": "该技能是数据分析与运营策略指南，不调用小红书API或专属工具，去掉小红书名称后仍可作为通用社媒分析指南存在。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-writer": {
+    "relevant": false,
+    "reason": "该技能是文案写作助手，不调用小红书API或专属工具，去掉小红书名称后仍可作为通用文案生成工具存在。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:chaceclaw-xiaohongshu-enhanced": {
+    "relevant": true,
+    "reason": "该技能专门为小红书生态开发，提供登录、发布、搜索等完整操作能力，核心功能依赖小红书平台，去掉小红书名称后价值不复存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-content-automation8": {
+    "relevant": false,
+    "reason": "该技能是内容自动化套件，描述为通用功能，不明确调用小红书API或专属工具，去掉小红书名称后仍可作为通用内容工具存在。",
+    "confidence": 0.4,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:zhuchenggong-xiaohongshu-post": {
+    "relevant": true,
+    "reason": "该技能专门为小红书发布设计，核心功能是小红书笔记发布，去掉小红书名称后价值不复存在。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-crawler-redfox": {
+    "relevant": true,
+    "reason": "专门为小红书平台开发的作品爬取工具，核心功能依赖小红书API/数据，去掉小红书后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:dragon-xiaohongshu": {
+    "relevant": true,
+    "reason": "专门用于自动发布内容到小红书平台，核心功能为小红书专属自动化。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-bahamo-copywriter": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款文案，核心用途为小红书平台内容创作，去掉小红书后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-algorithm-optimizer": {
+    "relevant": true,
+    "reason": "专门针对小红书推荐逻辑优化内容，核心功能依赖小红书平台算法。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbook": {
+    "relevant": true,
+    "reason": "专门用于搜索、分析、自动化小红书内容，核心功能为小红书专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbook-browser-ops": {
+    "relevant": true,
+    "reason": "专门通过浏览器自动化发布和管理小红书内容，核心功能为小红书专属。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:phil-auto-redbook-skills": {
+    "relevant": true,
+    "reason": "专门为小红书笔记素材创作和发布设计，核心功能依赖小红书平台，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:auto-redbook-content": {
+    "relevant": true,
+    "reason": "专门抓取小红书热点并进行去AI味改写，核心功能依赖小红书平台。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbook-daihuo": {
+    "relevant": true,
+    "reason": "专门生成小红书宠物带货笔记，核心功能依赖小红书平台。",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:sayba-redbook": {
+    "relevant": true,
+    "reason": "专门用于小红书内容搜索、阅读、分析和自动化，核心功能依赖小红书平台。",
+    "confidence": 0.96,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbookskill": {
+    "relevant": true,
+    "reason": "专门采集小红书低粉爆款热点并生成报告推送飞书，核心功能依赖小红书平台。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbook-skills": {
+    "relevant": true,
+    "reason": "专门将内容自动发布到小红书并支持互动操作，核心功能依赖小红书平台。",
+    "confidence": 0.97,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:redbookskills": {
+    "relevant": true,
+    "reason": "专门用于将内容自动发布到小红书，核心功能依赖小红书平台，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-feedback-analyzer": {
+    "relevant": true,
+    "reason": "专门监控和分析小红书上的跑腿类帖子，核心功能依赖小红书平台，去掉小红书后价值消失。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-skills": {
+    "relevant": true,
+    "reason": "专门与小红书平台交互，搜索帖子、提取内容等，核心功能依赖小红书API。",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-ops": {
+    "relevant": true,
+    "reason": "端到端的小红书运营技能，包括内容风格设定、生成帖子等，核心功能依赖小红书平台。",
+    "confidence": 0.96,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-creator": {
+    "relevant": true,
+    "reason": "专门用于小红书内容创作全流程，包括选题、文案、封面、发布，核心功能依赖小红书平台。",
+    "confidence": 0.97,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:skill": {
+    "relevant": false,
+    "reason": "通用工具，并列多个平台（虾评/ClawHub/GitHub/小红书 RED Skill/知识星球），非小红书专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-note-gen": {
+    "relevant": true,
+    "reason": "专门为小红书笔记生成设计，核心用途是调用小红书API生成笔记，去掉小红书名称后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-writing-coach": {
+    "relevant": true,
+    "reason": "专门用于小红书笔记写作辅导，核心功能是帮助用户撰写小红书笔记，去掉小红书后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:tianshu-xhs-note": {
+    "relevant": true,
+    "reason": "专门将素材整理成小红书笔记结构，核心用途是小红书笔记排版和标签，去掉小红书后价值消失。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xhs-note-health": {
+    "relevant": true,
+    "reason": "专门检测小红书笔记限流状态，通过小红书创作者后台API，核心功能依赖小红书平台。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:socialdatax-xhs-creator-notes": {
+    "relevant": true,
+    "reason": "专门用于小红书博主数据分析和笔记列表，核心功能依赖小红书平台数据。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:socialdatax-xhs-detail": {
+    "relevant": true,
+    "reason": "专门用于小红书笔记详情数据分析，核心功能依赖小红书平台数据。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:socialdatax-xhs-search": {
+    "relevant": true,
+    "reason": "专门用于小红书数据分析、笔记搜索、关键词检索等，核心功能依赖小红书平台，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:xiaohongshu-publish-attach": {
+    "relevant": true,
+    "reason": "专门用于小红书长文自动发布，调用小红书发布脚本，专属自动化工作流。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:lingzao": {
+    "relevant": false,
+    "reason": "并列支持小红书和抖音，非小红书专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:snapdesign-rednote": {
+    "relevant": true,
+    "reason": "专门将话题转化为小红书知识型图文，核心用途为小红书平台专属内容创作。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:pigbun-rednote": {
+    "relevant": true,
+    "reason": "小红书AI运营工具，支持搜索、发布、评论管理等，专属小红书自动化解决方案。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-mac": {
+    "relevant": true,
+    "reason": "专门控制小红书Mac客户端，实现评论回复、私信等，依赖小红书平台。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-summarize": {
+    "relevant": false,
+    "reason": "通用内容总结工具，非小红书专属开发工具，去掉小红书名称后仍可总结其他平台内容。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-publish-auto": {
+    "relevant": true,
+    "reason": "专门为小红书笔记创作与发布设计的全流程自动化工具，核心功能依赖小红书平台。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-research": {
+    "relevant": true,
+    "reason": "专门通过小红书信号进行话题研究，核心功能依赖小红书平台。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:github-to-rednote": {
+    "relevant": true,
+    "reason": "核心功能是将GitHub仓库转换为小红书风格技术文章，专门为小红书平台生成内容，离不开该平台。",
+    "confidence": 0.85,
+    "source": "llm_recheck",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-ranking": {
+    "relevant": true,
+    "reason": "专门追踪小红书账号涨粉数据，核心功能依赖小红书平台。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-contacts": {
+    "relevant": true,
+    "reason": "专门用于小红书联系人发现，核心功能依赖小红书平台。",
+    "confidence": 0.88,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-images": {
+    "relevant": true,
+    "reason": "专门为小红书生成图片系列，核心用途是小红书专属内容创作工具，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-writer-pro": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款文案，核心用途是小红书专属内容生成，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-publisher": {
+    "relevant": true,
+    "reason": "自动化在小红书网页版发布长图文笔记，核心用途是小红书专属发布工具，去掉小红书后价值消失。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-viral-writer": {
+    "relevant": true,
+    "reason": "专门生成小红书爆款笔记，核心用途是小红书专属内容创作，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:rednote-ranking-data": {
+    "relevant": true,
+    "reason": "专门追踪小红书涨粉数据，核心用途是小红书专属数据分析工具，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu": {
+    "relevant": true,
+    "reason": "专门通过JustOneAPI调用小红书API，核心用途是小红书专属数据接口，去掉小红书后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-share-url-transfer": {
+    "relevant": true,
+    "reason": "专门为小红书分享链接解析API封装，核心功能依赖小红书平台，去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-get-note-sub-comment": {
+    "relevant": true,
+    "reason": "专门为小红书评论回复API封装，核心功能依赖小红书平台，去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-search-note": {
+    "relevant": true,
+    "reason": "专门为小红书笔记搜索API封装，核心功能依赖小红书平台，去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-get-note-detail": {
+    "relevant": true,
+    "reason": "专门为小红书笔记详情API封装，核心功能依赖小红书平台，去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-get-note-comment": {
+    "relevant": true,
+    "reason": "专门为小红书笔记评论API封装，核心功能依赖小红书平台，去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-get-user": {
+    "relevant": true,
+    "reason": "专门为小红书用户资料API封装，核心功能依赖小红书平台，去掉小红书名称后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-search-user": {
+    "relevant": true,
+    "reason": "专门调用小红书用户搜索API，去除小红书名称后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-search-recommend": {
+    "relevant": true,
+    "reason": "专门调用小红书关键词建议API，去除小红书名称后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:justoneapi-xiaohongshu-get-user-note-list": {
+    "relevant": true,
+    "reason": "专门调用小红书用户笔记列表API，去除小红书名称后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "小红书|clawhub:socialdatax-xhs": {
+    "relevant": true,
+    "reason": "专门为小红书数据分析、搜索、博主数据等开发，去除小红书后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
   }
 }

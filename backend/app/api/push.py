@@ -19,8 +19,16 @@ from app.models import DigestPickRun, PushLog
 from app.schemas import (
     PushPreviewRequest,
     PushPreviewResponse,
+    PushRecipientAddRequest,
+    PushRecipientsUpdate,
     PushSendRequest,
     PushSendResponse,
+)
+from app.services.push.push_targets import (
+    add_push_recipient,
+    get_push_recipients,
+    remove_push_recipient,
+    set_push_recipients,
 )
 from app.services.digest.engine import save_digest_run, select_daily_picks
 from app.services.push.ruliu_notifier import send_digest
@@ -36,8 +44,12 @@ def _parse_date(value: str | None) -> date | None:
 
 @router.get("/targets")
 async def push_targets():
+    rec = await get_push_recipients()
     settings = get_settings()
     return {
+        "dm_users": rec.get("dm_users") or [],
+        "group_ids": rec.get("group_ids") or [],
+        "official_new_dm_users": rec.get("official_new_dm_users") or [],
         "dm": {
             "label": "单聊",
             "default_user": settings.ruliu_dm_user or "wangheqiao",
@@ -47,6 +59,36 @@ async def push_targets():
             "default_group_id": settings.ruliu_group_id or "13038971",
         },
     }
+
+
+@router.put("/targets")
+async def update_push_targets(body: PushRecipientsUpdate):
+    data = body.model_dump(exclude_none=True)
+    if not data:
+        return await push_targets()
+    return await set_push_recipients(data)
+
+
+@router.post("/targets/add")
+async def add_push_target(body: PushRecipientAddRequest):
+    try:
+        await add_push_recipient(body.kind, body.value)
+        return await push_targets()
+    except ValueError as exc:
+        from fastapi import HTTPException
+
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/targets/remove")
+async def remove_push_target(body: PushRecipientAddRequest):
+    try:
+        await remove_push_recipient(body.kind, body.value)
+        return await push_targets()
+    except ValueError as exc:
+        from fastapi import HTTPException
+
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @router.post("/preview", response_model=PushPreviewResponse)

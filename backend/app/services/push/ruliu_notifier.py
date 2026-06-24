@@ -416,9 +416,10 @@ def _plain_text_fallback(content: str) -> str:
     return text.strip()
 
 
-async def send_dm_markdown(content: str) -> dict[str, Any]:
+async def send_dm_markdown(content: str, *, touser: str | None = None) -> dict[str, Any]:
     settings = get_settings()
-    if not settings.ruliu_dm_user:
+    target_user = touser or settings.ruliu_dm_user
+    if not target_user:
         raise ValueError("RULIU_DM_USER required for DM push")
 
     body = content[:MD_MAX_LEN]
@@ -426,9 +427,9 @@ async def send_dm_markdown(content: str) -> dict[str, Any]:
     url = f"{settings.ruliu_api_base.rstrip('/')}/app/message/send"
 
     payloads = [
-        {"touser": settings.ruliu_dm_user, "msgtype": "md", "md": {"content": body}},
+        {"touser": target_user, "msgtype": "md", "md": {"content": body}},
         {
-            "touser": settings.ruliu_dm_user,
+            "touser": target_user,
             "msgtype": "text",
             "text": {"content": _plain_text_fallback(body)},
         },
@@ -444,12 +445,26 @@ async def send_dm_markdown(content: str) -> dict[str, Any]:
                     last_error = RuntimeError(f"Ruliu DM HTTP error: {data}")
                     continue
                 _parse_dm_response(data)
-                return {"payload_type": payload["msgtype"], "response": data}
+                return {"touser": target_user, "payload_type": payload["msgtype"], "response": data}
             except Exception as exc:
                 last_error = exc
                 logger.warning("DM push attempt failed (%s): %s", payload.get("msgtype"), exc)
 
     raise RuntimeError(f"Ruliu DM push failed: {last_error}")
+
+
+async def send_dm_to_users(content: str, users: list[str]) -> list[dict[str, Any]]:
+    if not users:
+        raise ValueError("no DM recipients")
+    results: list[dict[str, Any]] = []
+    messages = split_md_messages(content)
+    for user in users:
+        for idx, part in enumerate(messages):
+            results.append(await send_dm_markdown(part, touser=user))
+            if idx + 1 < len(messages):
+                await asyncio.sleep(0.3)
+        await asyncio.sleep(0.2)
+    return results
 
 
 async def send_group_md(
@@ -486,7 +501,7 @@ async def send_group_md(
 
 
 async def send_digest(
-    content: str, dry_run: bool = False, *, target: str | None = None
+    content: str, dry_run: bool = False, *, target: str | None = None, dm_users: list[str] | None = None
 ) -> dict[str, Any]:
     settings = get_settings()
     messages = split_md_messages(content)
@@ -495,16 +510,32 @@ async def send_digest(
     if not settings.ruliu_app_key:
         return {"dry_run": True, "message": "RULIU_APP_KEY not configured"}
 
+    from app.services.push.push_targets import get_push_recipients
+
+    recipients = await get_push_recipients()
     notify_target = (target or settings.ruliu_notify_target).lower()
     results: list[dict[str, Any]] = []
 
-    for idx, part in enumerate(messages):
-        if notify_target == "group":
-            results.append(await send_group_md(part, force=True))
-        else:
-            results.append(await send_dm_markdown(part))
-        if idx + 1 < len(messages):
-            await asyncio.sleep(0.3)
+    if notify_target == "group":
+        group_ids = recipients.get("group_ids") or []
+        if not group_ids and settings.ruliu_group_id:
+            group_ids = [settings.ruliu_group_id]
+        for gid in group_ids:
+            for idx, part in enumerate(messages):
+                results.append(await send_group_md(part, group_id=gid, force=True))
+                if idx + 1 < len(messages):
+                    await asyncio.sleep(0.3)
+            await asyncio.sleep(0.2)
+    else:
+        users = dm_users or recipients.get("dm_users") or []
+        if not users and settings.ruliu_dm_user:
+            users = [settings.ruliu_dm_user]
+        for user in users:
+            for idx, part in enumerate(messages):
+                results.append(await send_dm_markdown(part, touser=user))
+                if idx + 1 < len(messages):
+                    await asyncio.sleep(0.3)
+            await asyncio.sleep(0.2)
 
     return {"parts": len(messages), "results": results}
 

@@ -46,14 +46,32 @@ def test_skillsmp_is_creator():
     assert data_source_for(skill) == "SkillsMP"
 
 
-def test_redskill_is_official():
+def test_redskill_catalog_is_creator_not_official():
     skill = _skill(
         source_id="xiaohongshu_red_skill",
-        external_id="rs:1",
-        metadata_json={"catalog": "redskill", "redskill": True},
+        external_id="redskill:xiaohongshu-mcp",
+        metadata_json={"catalog": "clawhub", "redskill_catalog": True},
+    )
+    assert publisher_type_for(skill) == PUBLISHER_CREATOR
+    assert data_source_for(skill) == "ClawHub"
+
+
+def test_redskill_legacy_flag_is_creator():
+    skill = _skill(
+        source_id="xiaohongshu_red_skill",
+        external_id="redskill:xiaohongshu-mcp",
+        metadata_json={"catalog": "clawhub", "redskill": True},
+    )
+    assert publisher_type_for(skill) == PUBLISHER_CREATOR
+
+
+def test_xhs_official_entry_is_official():
+    skill = _skill(
+        source_id="xiaohongshu_red_skill",
+        external_id="xhs-red-skill-platform",
+        metadata_json={"catalog": "official", "official": True},
     )
     assert publisher_type_for(skill) == PUBLISHER_OFFICIAL
-    assert data_source_for(skill) == "RedSkill目录"
 
 
 def test_enrich_metadata_sets_labels():

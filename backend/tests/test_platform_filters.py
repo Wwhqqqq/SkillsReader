@@ -47,7 +47,7 @@ def test_xhs_accepts_redskill_catalog_entry():
         vendor="小红书",
         source_id="xiaohongshu_red_skill",
         raw_description="Python MCP client for full Xiaohongshu automation.",
-        metadata={"redskill": True},
+        metadata={"redskill_catalog": True},
     )
     assert is_xhs_relevant(rec)
 

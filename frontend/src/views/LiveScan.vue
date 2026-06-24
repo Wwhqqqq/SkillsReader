@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { NSelect, NButton } from 'naive-ui'
 import { api, wsScanEvents } from '../api/client'
+import { formatBeijingTimeOnly } from '../utils/time'
 
 const logs = ref<any[]>([])
 const filterLevel = ref<string | null>(null)
@@ -73,7 +74,7 @@ async function clearLogs() {
         class="log-line"
         :class="ev.level === 'error' ? 'error' : ev.level === 'success' ? 'success' : 'info'"
       >
-        [{{ ev.created_at?.slice(11, 19) || '--:--:--' }}]
+        [{{ formatBeijingTimeOnly(ev.created_at) || '--:--:--' }}]
         {{ ev.source_id ? `[${ev.source_id}] ` : '' }}{{ ev.message }}
       </div>
       <div v-if="!filtered().length" class="log-line info">等待扫描事件...</div>

@@ -30,9 +30,9 @@ from app.init_db import init_db
 from app.models import Source
 from app.services.scan.full_scan import run_full_scan_batch
 from app.services.scan.official_scan import run_official_scan_batch
+from app.services.scan.portal_schedule import official_interval_sec
 from app.services.scan.schedule_config import (
     full_scan_interval_sec,
-    official_interval_sec,
     per_source_scan_enabled,
     startup_delay_sec,
 )
@@ -64,7 +64,7 @@ async def _due(last_ts: float | None, interval_sec: int) -> bool:
 
 
 async def _run_official_portal_if_due() -> bool:
-    interval = official_interval_sec()
+    interval = await official_interval_sec()
     last = await get_worker_last_run(WORKER_LAST_OFFICIAL_KEY)
     if not await _due(last, interval):
         return False
@@ -124,7 +124,7 @@ async def run_scan_loop() -> None:
     delay = startup_delay_sec()
     logger.info(
         "Worker started — official every %ss, full every %ss, per_source=%s, startup_delay=%ss",
-        official_interval_sec(),
+        await official_interval_sec(),
         full_scan_interval_sec(),
         per_source_scan_enabled(),
         delay,

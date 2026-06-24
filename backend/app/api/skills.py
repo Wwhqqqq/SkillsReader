@@ -21,7 +21,7 @@ from app.schemas import SkillListResponse
 from app.services.export.skill_export import (
     build_bundle_filename,
     build_export_filename,
-    build_vendor_csv_bundle,
+    build_vendor_bundle,
     fetch_skills_for_export,
     rows_to_csv,
     rows_to_xlsx,
@@ -124,15 +124,20 @@ async def export_skills_bundle(
     today_only: bool = False,
     recent_only: bool = False,
     scope: str = Query("domestic", pattern="^(domestic|all)$"),
+    vendors: str | None = None,
+    fmt: str = Query("csv", pattern="^(csv|xlsx)$"),
 ):
-    """Download a ZIP containing one CSV per vendor (domestic vendors by default)."""
-    content, vendors = await build_vendor_csv_bundle(
+    """Download a ZIP containing one file per vendor (domestic vendors by default)."""
+    vendor_list = [v.strip() for v in vendors.split(",") if v.strip()] if vendors else None
+    content, included = await build_vendor_bundle(
         session,
         today_only=today_only,
         recent_only=recent_only,
         scope=scope,
+        vendors=vendor_list,
+        fmt=fmt,
     )
-    if not vendors:
+    if not included:
         return Response(content=b"", media_type="text/plain", status_code=404)
 
     filename = build_bundle_filename(

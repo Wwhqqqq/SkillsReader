@@ -11,28 +11,18 @@ PUBLISHER_CREATOR = "个人创作者"
 
 OFFICIAL_PORTAL_SOURCES = frozenset({"meituan_ai_hub", "aliyun_skills_portal"})
 CREATOR_CATALOGS = frozenset({"skillsmp", "clawhub", "github"})
-OFFICIAL_CATALOGS = frozenset({"official", "official_api", "official_github", "redskill"})
-# SkillsMP/ClawHub 镜像的官方 GitHub 仓库（与腾讯 adapter OFFICIAL_GITHUB_REPOS 对齐）
-VENDOR_OFFICIAL_GITHUB_REPOS = frozenset(
-    {
-        "TencentCloudBase/skills",
-        "TencentCloudBase/awesome-miniprogram-skills",
-        "TencentCloudBase/cloudbase-skills",
-        "TencentCloudBase/CloudBase-MCP",
-        "TencentCloudBase/mp-skills",
-        "wechat-miniprogram/ai-mode-skills",
-        "WecomTeam/wecom-openclaw-plugin",
-    }
-)
+OFFICIAL_CATALOGS = frozenset({"official", "official_api", "official_github"})
 
 
 def _is_official_repo_mirror(meta: dict[str, Any], external_id: str) -> bool:
-    """SkillsMP/ClawHub 收录的官方仓库 SKILL.md，应视为官方发布。"""
+    """SkillsMP/ClawHub 镜像的官方仓库 SKILL.md，应视为官方发布。"""
+    from app.adapters.common.official_github_config import all_official_repo_names, is_official_github_repo
+
     repo = str(meta.get("repo") or "")
-    if repo in VENDOR_OFFICIAL_GITHUB_REPOS:
+    if is_official_github_repo(repo):
         return True
     eid = external_id.lower()
-    for official_repo in VENDOR_OFFICIAL_GITHUB_REPOS:
+    for official_repo in all_official_repo_names():
         slug = official_repo.lower().replace("/", "-")
         if slug in eid:
             return True
@@ -62,28 +52,24 @@ def publisher_type_for(skill_or_meta: Skill | dict[str, Any]) -> str:
     meta = _meta_dict(skill_or_meta)
     catalog = str(meta.get("catalog") or "")
 
-    if meta.get("publisherType") == PUBLISHER_OFFICIAL:
-        return PUBLISHER_OFFICIAL
-
     if (
         meta.get("official")
-        or meta.get("redskill")
         or meta.get("agentkit")
         or catalog in OFFICIAL_CATALOGS
     ):
         return PUBLISHER_OFFICIAL
 
     external_id = _external_id(skill_or_meta, meta)
+    owner = str(meta.get("owner") or "").strip()
+    if owner and _is_official_repo_mirror({"repo": owner}, owner):
+        return PUBLISHER_OFFICIAL
     if _is_official_repo_mirror(meta, external_id):
         return PUBLISHER_OFFICIAL
-
-    if meta.get("publisherType") == PUBLISHER_CREATOR:
-        return PUBLISHER_CREATOR
 
     if catalog in CREATOR_CATALOGS:
         return PUBLISHER_CREATOR
 
-    if external_id.startswith(("skillsmp:", "clawhub:")):
+    if external_id.startswith(("skillsmp:", "clawhub:", "redskill:")):
         return PUBLISHER_CREATOR
 
     source_id = _source_id(skill_or_meta, meta)
@@ -112,7 +98,7 @@ def data_source_for(skill_or_meta: Skill | dict[str, Any]) -> str:
         return "SkillsMP"
     if catalog == "clawhub" or external_id.startswith("clawhub:"):
         return "ClawHub"
-    if catalog == "redskill" or meta.get("redskill"):
+    if catalog == "redskill" or meta.get("redskill_catalog") or meta.get("redskill"):
         return "RedSkill目录"
     if meta.get("agentkit"):
         return "AgentKit API"
@@ -164,6 +150,8 @@ def enrich_metadata(
     meta.setdefault("vendor", vendor)
     meta.setdefault("source_id", source_id)
     meta.setdefault("external_id", external_id)
+    meta.pop("publisherType", None)
+    meta.pop("dataSource", None)
     meta["publisherType"] = publisher_type_for(meta)
     meta["dataSource"] = data_source_for(meta)
     return meta

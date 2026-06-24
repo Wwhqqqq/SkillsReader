@@ -27,9 +27,7 @@ CACHE_FILE = CACHE_DIR / "vendor_relevance_cache.json"
 PROMPT_VERSION = "2"
 CONFIDENCE_MIN = 0.82
 
-OFFICIAL_CATALOGS = frozenset(
-    {"official", "official_api", "official_github", "redskill"}
-)
+OFFICIAL_CATALOGS = frozenset({"official", "official_api", "official_github"})
 
 VENDOR_REPO_PATTERN: dict[str, re.Pattern[str]] = {
     "美团": re.compile(r"meituan|美团|dianping|大众点评", re.I),
@@ -220,7 +218,7 @@ def _save_cache(cache: dict[str, dict[str, Any]]) -> None:
 
 def is_official_record(rec: RawSkillRecord) -> bool:
     meta = rec.metadata or {}
-    if meta.get("official") or meta.get("agentkit") or meta.get("redskill"):
+    if meta.get("official") or meta.get("agentkit"):
         return True
     return str(meta.get("catalog") or "") in OFFICIAL_CATALOGS
 

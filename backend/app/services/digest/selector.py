@@ -136,6 +136,17 @@ def _first_seen_ts(ctx: CandidateContext) -> datetime:
     return ctx.skill.first_seen_at or datetime.min
 
 
+def _official_new_priority(ctx: CandidateContext) -> int:
+    meta = ctx.skill.metadata_json if isinstance(ctx.skill.metadata_json, dict) else {}
+    if meta.get("catalog") == "official_github" or (
+        meta.get("official") and meta.get("repo")
+    ):
+        return 3
+    if ctx.is_official:
+        return 2
+    return 1
+
+
 def select_official_new_picks(
     candidates: list[CandidateContext],
     cfg: dict[str, Any],
@@ -169,7 +180,12 @@ def select_official_new_picks(
 
     items = [c for c in candidates if is_recent_official(c)]
     items.sort(
-        key=lambda c: (_first_seen_ts(c), c.score_total, c.skill.quality_score),
+        key=lambda c: (
+            _official_new_priority(c),
+            _first_seen_ts(c),
+            c.score_total,
+            c.skill.quality_score,
+        ),
         reverse=True,
     )
 

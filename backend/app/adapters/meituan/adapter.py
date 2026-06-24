@@ -23,6 +23,7 @@ from typing import Any  # Any = 任意类型，用于 JSON dict 等动态结构
 import httpx  # 异步 HTTP 客户端
 
 from app.adapters.base import RawSkillRecord, SourceAdapter
+from app.adapters.common.clawhub_search import fetch_clawhub_for_vendor
 from app.adapters.common.skillsmp_catalog import fetch_skillsmp_for_vendor
 from app.services.enrichment.vendor_relevance import apply_vendor_relevance_split
 
@@ -80,6 +81,16 @@ class MeituanAdapter(SourceAdapter):
                 vendor=self.vendor,
                 source_id=self.source_id,
                 max_pages=3,
+            ):
+                if rec.external_id not in seen:
+                    seen.add(rec.external_id)
+                    records.append(rec)
+
+            for rec in await fetch_clawhub_for_vendor(
+                client,
+                vendor=self.vendor,
+                source_id=self.source_id,
+                queries=("meituan", "美团", "meituan skill", "美团 skill"),
             ):
                 if rec.external_id not in seen:
                     seen.add(rec.external_id)
