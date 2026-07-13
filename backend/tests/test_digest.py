@@ -4,8 +4,16 @@ from datetime import date, datetime, timedelta
 
 from app.models import Skill
 from app.services.digest.config_loader import load_digest_config
-from app.services.digest.metrics import GrowthMetrics, apply_platform_zscores, build_growth_metrics, growth_rate
-from app.services.digest.pools import POOL_OFFICIAL, POOL_TREND, POOL_DISCOVERY, CandidateContext, classify_pools
+from app.services.digest.metrics import GrowthMetrics, apply_platform_zscores, build_growth_metrics, growth_rate, metric_abs_delta
+from app.services.digest.pools import (
+    POOL_MOMENTUM,
+    POOL_OFFICIAL,
+    POOL_RECENT_24H,
+    POOL_RECENT_7D,
+    POOL_TREND,
+    CandidateContext,
+    classify_pools,
+)
 from app.services.digest.scorer import score_candidate
 from app.services.digest.selector import select_official_new_picks, select_structured_picks
 
@@ -85,6 +93,44 @@ def test_score_candidate_official_bonus():
     assert bd["official"] >= 20
 
 
+def test_momentum_slot_prefers_largest_delta():
+    cfg = load_digest_config()
+    vendors = ["腾讯", "阿里", "美团", "字节", "知乎", "小红书", "哔哩哔哩", "快手", "滴滴", "拼多多"]
+    candidates = []
+    for i in range(1, 11):
+        install = 100 + i * 10
+        skill = _skill(
+            i,
+            vendor=vendors[i - 1],
+            install=install,
+            official=False,
+            quality=70,
+            source_id="skills_sh",
+            days_ago=30,
+        )
+        delta = i * 50
+        growth = GrowthMetrics(
+            metric_value=install,
+            value_3d_ago=install - delta,
+            value_7d_ago=install - delta * 2,
+            trend_velocity_score=10,
+        )
+        candidates.append(
+            CandidateContext(
+                skill=skill,
+                growth=growth,
+                pools={POOL_MOMENTUM},
+                is_official=False,
+                is_new=False,
+            )
+        )
+    apply_platform_zscores([(c.skill.source_id, c.growth) for c in candidates], cfg)
+    picks = select_structured_picks(candidates, cfg, top_n=10)
+    mom_picks = [p for p in picks if p.slot == "momentum"]
+    assert len(mom_picks) >= 2
+    assert max(metric_abs_delta(p.growth, window="24h") for p in mom_picks) >= 400
+
+
 def test_structured_selector_respects_slot_counts():
     cfg = load_digest_config()
     ref = date.today()
@@ -107,7 +153,7 @@ def test_structured_selector_respects_slot_counts():
         )
         pools = classify_pools(skill, growth, cfg, ref_date=ref)
         if not pools:
-            pools = {POOL_DISCOVERY}
+            pools = {POOL_RECENT_7D}
         candidates.append(
             CandidateContext(
                 skill=skill,
@@ -124,6 +170,34 @@ def test_structured_selector_respects_slot_counts():
     assert len({p.skill.id for p in picks}) == 10
 
 
+def test_official_new_push_skips_diversity_cap():
+    cfg = load_digest_config()
+    ref = date.today()
+    candidates = []
+    for i in range(1, 26):
+        skill = _skill(i, vendor="腾讯", install=100 + i, official=True, quality=80)
+        growth = GrowthMetrics(trend_velocity_score=10)
+        candidates.append(
+            CandidateContext(
+                skill=skill,
+                growth=growth,
+                pools={POOL_OFFICIAL},
+                is_official=True,
+                is_new=True,
+            )
+        )
+    picks = select_official_new_picks(
+        candidates,
+        cfg,
+        top_n=25,
+        ref_date=ref,
+        skip_recency_filter=True,
+        skip_official_filter=True,
+        skip_diversity_limits=True,
+    )
+    assert len(picks) == 25
+
+
 def test_select_official_new_picks_only_official_and_recent():
     cfg = load_digest_config()
     ref = date.today()
@@ -136,7 +210,7 @@ def test_select_official_new_picks_only_official_and_recent():
             CandidateContext(
                 skill=skill,
                 growth=growth,
-                pools=pools or {POOL_DISCOVERY},
+                pools=pools or {POOL_RECENT_7D},
                 is_official=official,
                 is_new=days_ago <= 1,
             )

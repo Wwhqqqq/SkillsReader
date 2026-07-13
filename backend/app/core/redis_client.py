@@ -39,6 +39,9 @@ WORKER_LAST_OFFICIAL_KEY = "iknow:worker:last_official_portal"
 WORKER_LAST_FULL_KEY = "iknow:worker:last_full_scan"
 
 
+SELF_MEDIA_PUSHED_KEY = "iknow:self_media_pushed_ids"
+
+
 async def get_redis() -> aioredis.Redis | None:
     """
     懒加载 Redis 连接。
@@ -138,6 +141,7 @@ async def set_auto_push_mode(mode: str) -> None:
 
 _memory_digest_schedule: dict[str, Any] | None = None
 _memory_digest_pushed: set[str] = set()
+_memory_self_media_pushed: set[int] = set()
 _memory_official_scan: dict[str, Any] | None = None
 _memory_worker_last_run: dict[str, float] = {}
 
@@ -302,6 +306,29 @@ async def mark_digest_slot_pushed(slot_key: str) -> bool:
         return False
     _memory_digest_pushed.add(slot_key)
     return True
+
+
+async def get_self_media_pushed_ids() -> set[int]:
+    """获取已推送过自媒体精选的 Skill ID 集合（7天窗口）。"""
+    global _memory_self_media_pushed
+    r = await get_redis()
+    if r:
+        raw = await r.smembers(SELF_MEDIA_PUSHED_KEY)
+        if raw:
+            return {int(x) for x in raw if x.isdigit()}
+        return set()
+    return _memory_self_media_pushed
+
+
+async def add_self_media_pushed(skill_ids: list[int]) -> None:
+    """将一批 Skill ID 加入已推送集合（Redis SET 7 天过期 + 内存降级）。"""
+    global _memory_self_media_pushed
+    r = await get_redis()
+    if r:
+        if skill_ids:
+            await r.sadd(SELF_MEDIA_PUSHED_KEY, *[str(sid) for sid in skill_ids])
+            await r.expire(SELF_MEDIA_PUSHED_KEY, 86400 * 7)
+    _memory_self_media_pushed.update(skill_ids)
 
 
 async def create_pubsub():

@@ -17,12 +17,16 @@ from app.services.digest.config_loader import config_version, load_digest_config
 from app.services.digest.formatter import format_digest_markdown
 from app.services.digest.push_desc import polish_push_descriptions
 from app.services.digest.pools import build_candidates, build_candidates_from_skill_ids
-from app.services.digest.selector import select_official_new_picks, select_structured_picks
+from app.services.digest.selector import (
+    select_guaranteed_official_new,
+    select_official_new_picks,
+    select_structured_picks,
+)
 from app.services.digest.types import DigestPickItem, DigestResult
 
 
 def _primary_pool(ctx) -> str:
-    order = ("official", "trend", "discovery", "popularity")
+    order = ("recent_24h", "recent_7d", "momentum", "official", "trend", "discovery", "popularity")
     for p in order:
         if p in ctx.pools:
             return p
@@ -78,12 +82,19 @@ async def select_daily_picks(
     if channel == "official_new":
         picks = select_official_new_picks(candidates, cfg, top_n=top_n, ref_date=ref)
     else:
-        picks = select_structured_picks(candidates, cfg, top_n=top_n)
+        guaranteed = select_guaranteed_official_new(candidates, cfg, ref_date=ref)
+        guaranteed_ids = {c.skill.id for c in guaranteed}
+        structured = select_structured_picks(
+            [c for c in candidates if c.skill.id not in guaranteed_ids],
+            cfg,
+            top_n=top_n,
+        )
+        picks = guaranteed + structured
     items = _build_items(picks)
 
     result = DigestResult(
         digest_date=ref,
-        top_n=top_n,
+        top_n=len(items),
         items=items,
         config_version=config_version(cfg),
         meta={
@@ -93,7 +104,16 @@ async def select_daily_picks(
             "vendors": vendors or [],
             "pool_distribution": {
                 slot: sum(1 for it in items if it.slot == slot)
-                for slot in ("official", "trend", "discovery", "fill", "official_new")
+                for slot in (
+                    "recent_24h",
+                    "recent_7d",
+                    "momentum",
+                    "official",
+                    "trend",
+                    "discovery",
+                    "fill",
+                    "official_new",
+                )
             },
         },
     )
@@ -120,6 +140,7 @@ async def select_official_new_from_scan_ids(
     picks = select_official_new_picks(
         candidates, cfg, top_n=top_n, ref_date=ref,
         skip_recency_filter=True, skip_official_filter=True,
+        skip_diversity_limits=True,
     )
     items = _build_items(picks)
     result = DigestResult(

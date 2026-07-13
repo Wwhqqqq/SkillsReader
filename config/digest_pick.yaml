@@ -1,5 +1,5 @@
-# 每日精选 —— 生产评分与调度
-version: "3"
+# 每日精选 —— 24h/7d 新发现 + 安装量变化最大
+version: "4"
 
 schedule:
   times:
@@ -22,15 +22,15 @@ selection:
   quality_threshold: 40
 
   slots:
-    official:
-      count: 3
-      pool: official
-    trend:
+    recent_24h:
       count: 4
-      pool: trend
-    discovery:
+      pool: recent_24h
+    recent_7d:
       count: 3
-      pool: discovery
+      pool: recent_7d
+    momentum:
+      count: 3
+      pool: momentum
 
   diversity:
     max_per_vendor: 2
@@ -63,7 +63,10 @@ pools:
     min_quality: 45
 
   trend:
-    min_trend_velocity: 50
+    min_trend_velocity: 2.0
+
+  momentum:
+    min_abs_delta: 1
 
   discovery:
     max_age_days: 14
@@ -73,6 +76,15 @@ pools:
 scoring:
   mode: whitelist_install
 
+  # 安装量用 log10 拉开 1k～100万 档位，避免 5k+ 全部顶满 100 分
+  install_score_mode: log10
+  install_log_multiplier: 12.5
+  install_weight_in_total: 0.48
+  vendor_weight_in_total: 0.32
+  velocity_weight_in_total: 0.20
+  trend_slot_install_weight: 0.40
+  trend_slot_velocity_weight: 0.60
+
   final_weights:
     trend: 0.55
     official: 0.40
@@ -81,7 +93,7 @@ scoring:
 
   install_exponent: 0.42
   install_multiplier: 3.2
-  whitelist_vendor_score: 85
+  whitelist_vendor_score: 72
   official_publisher_score: 70
 
   velocity_weights:
@@ -101,7 +113,7 @@ scoring:
 
 push:
   table_only: true
-  title_template: "SkillGetter 每日精选 Top{top_n} · {date}"
+  title_template: "SkillGetter 每日精选 · 新发现与变化 Top{top_n} · {date}"
   include_score_breakdown: false
   include_recommend_reason: true
   polish_description: true
@@ -115,6 +127,9 @@ push:
     polish_description: true
     description_max_len: 200
     max_new_days: 1
+    max_new_hours: 24
+    guarantee_in_digest: true
+    domestic_only: true
     top_n: 50
     max_per_vendor: 20
 

@@ -1,17 +1,18 @@
-"""结构化 Top N 选择模块。
-
-本模块实现文档 §7.3 中的槽位分配（slots）与多样性约束（同厂商/同平台上限），
-以及从各池中按不同排序策略挑选候选填充最终 TopN 的逻辑。
-"""
+"""结构化 Top N 选择模块 —— 24h/7d 新发现 + 安装量变化最大。"""
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Any
 
+from app.services.digest.config_loader import domestic_vendors
+from app.services.digest.metrics import metric_abs_delta, momentum_score
 from app.services.digest.pools import (
-    POOL_DISCOVERY,
+    POOL_MOMENTUM,
     POOL_OFFICIAL,
+    POOL_POPULARITY,
+    POOL_RECENT_24H,
+    POOL_RECENT_7D,
     POOL_TREND,
     CandidateContext,
 )
@@ -20,8 +21,6 @@ from app.services.digest.scorer import score_all_candidates
 
 
 def _scale_slots(slots_cfg: dict[str, Any], top_n: int) -> list[tuple[str, str, int]]:
-    # 将 slots 配置（如 {"official": {"pool":"official","count":3}, ...}）
-    # 按 top_n 缩放为实际的每个槽位分配数量，保证总和为 top_n。
     raw = [(n, str(s.get("pool") or n), int(s.get("count") or 0)) for n, s in slots_cfg.items()]
     base = sum(c for _, _, c in raw) or top_n
     scaled, assigned = [], 0
@@ -48,11 +47,9 @@ def _pick_from_pool(
     max_platform: int,
     sort_key,
 ) -> list[CandidateContext]:
-    # 过滤出属于指定池且未被选中的候选，按传入的 sort_key 排序（可以是分数/趋势/质量等复合键）
     items = [c for c in candidates if pool in c.pools and c.skill.id not in selected_ids]
     items.sort(key=sort_key, reverse=True)
     picked: list[CandidateContext] = []
-    # 迭代候选并实时应用多样性约束：同一厂商与同一平台的选入次数不得超过阈值
     for ctx in items:
         if len(picked) >= count:
             break
@@ -68,6 +65,46 @@ def _pick_from_pool(
     return picked
 
 
+def _first_seen_ts(ctx: CandidateContext) -> datetime:
+    return ctx.skill.first_seen_at or datetime.min
+
+
+def _momentum_sort_key(ctx: CandidateContext):
+    g = ctx.growth
+    return (
+        momentum_score(g),
+        metric_abs_delta(g, window="24h"),
+        metric_abs_delta(g, window="7d"),
+        g.growth_3d_pct or 0,
+        ctx.skill.install_count or 0,
+    )
+
+
+def _recent_sort_key(ctx: CandidateContext):
+    return (
+        _first_seen_ts(ctx),
+        momentum_score(ctx.growth),
+        ctx.skill.install_count or 0,
+        1 if ctx.is_official else 0,
+    )
+
+
+def _sort_key_for_pool(pool: str, cfg: dict[str, Any]):
+    if pool == POOL_RECENT_24H:
+        return _recent_sort_key
+    if pool == POOL_RECENT_7D:
+        return _recent_sort_key
+    if pool == POOL_MOMENTUM:
+        return _momentum_sort_key
+    if pool == POOL_OFFICIAL:
+        return lambda c: (c.score_total, c.skill.install_count or 0, c.growth.trend_velocity_score)
+    if pool == POOL_POPULARITY:
+        return lambda c: (c.skill.install_count or 0, momentum_score(c.growth))
+    if pool == POOL_TREND:
+        return _momentum_sort_key
+    return _recent_sort_key
+
+
 def select_structured_picks(
     candidates: list[CandidateContext],
     cfg: dict[str, Any],
@@ -81,25 +118,15 @@ def select_structured_picks(
     max_vendor = int(div.get("max_per_vendor") or 2)
     max_platform = int(div.get("max_per_platform") or 4)
 
-    # 先为所有候选计算分数（score_total 与 score_breakdown）
     score_all_candidates(candidates, cfg)
-
-    # 不同槽位使用不同的排序键：
-    # - 官方槽位优先总体得分；
-    # - 趋势槽位优先 trend_velocity_score；
-    # - 发现槽位优先新近标记与质量分。
-    sort_score = lambda c: (c.score_total, c.growth.trend_velocity_score)
-    sort_trend = lambda c: (c.growth.trend_velocity_score, c.growth.log_growth_1d, c.score_total)
-    sort_disc = lambda c: (1 if c.is_new else 0, c.score_breakdown.get("quality", 0), c.score_total)
 
     result: list[CandidateContext] = []
     selected_ids: set[int] = set()
     vendor_count: dict[str, int] = {}
     platform_count: dict[str, int] = {}
 
-    # 逐槽位挑选：按 scaled slots 顺序对每个池挑选指定数量
     for slot_name, pool, count in _scale_slots(slots, top_n):
-        key = sort_score if pool == POOL_OFFICIAL else sort_trend if pool == POOL_TREND else sort_disc
+        key = _sort_key_for_pool(pool, cfg)
         picked = _pick_from_pool(
             candidates,
             pool,
@@ -116,11 +143,10 @@ def select_structured_picks(
             ctx.recommend_reason = build_recommend_reason(ctx, slot_name)
             result.append(ctx)
 
-    # 若不足 top_n，则补位：按总体评分从剩余候选中补充，slot 标记为 'fill'
     if len(result) < top_n:
         for ctx in sorted(
             [c for c in candidates if c.skill.id not in selected_ids],
-            key=sort_score,
+            key=_momentum_sort_key,
             reverse=True,
         ):
             if len(result) >= top_n:
@@ -130,10 +156,6 @@ def select_structured_picks(
             result.append(ctx)
 
     return result[:top_n]
-
-
-def _first_seen_ts(ctx: CandidateContext) -> datetime:
-    return ctx.skill.first_seen_at or datetime.min
 
 
 def _official_new_priority(ctx: CandidateContext) -> int:
@@ -147,6 +169,27 @@ def _official_new_priority(ctx: CandidateContext) -> int:
     return 1
 
 
+def _is_recent_official(
+    ctx: CandidateContext,
+    *,
+    ref: date,
+    ref_dt: datetime | None,
+    max_new_days: int,
+    max_new_hours: int | None,
+    skip_recency_filter: bool,
+) -> bool:
+    if skip_recency_filter:
+        return True
+    fs = ctx.skill.first_seen_at
+    if not fs:
+        return False
+    if max_new_hours and max_new_hours > 0 and ref_dt is not None:
+        age_h = (ref_dt - fs).total_seconds() / 3600.0
+        return age_h <= max_new_hours
+    age_days = (ref - fs.date()).days
+    return age_days <= max_new_days
+
+
 def select_official_new_picks(
     candidates: list[CandidateContext],
     cfg: dict[str, Any],
@@ -155,30 +198,45 @@ def select_official_new_picks(
     ref_date: date | None = None,
     skip_recency_filter: bool = False,
     skip_official_filter: bool = False,
+    skip_diversity_limits: bool = False,
+    domestic_only: bool | None = None,
 ) -> list[CandidateContext]:
-    """仅挑选官方发布、且在最近 N 天内首次发现的 Skill（官方新增日报）。"""
+    """挑选官方发布、且在最近 N 天/小时内首次发现的 Skill（官方新增日报 / 保底推送）。"""
     sel = cfg.get("selection") or {}
     push_cfg = (cfg.get("push") or {}).get("official_new") or {}
-    ref = ref_date or datetime.utcnow().date()
+    ref = ref_date or datetime.now(timezone.utc).replace(tzinfo=None).date()
+    ref_dt = datetime.combine(ref, datetime.max.time()).replace(microsecond=0)
     top_n = top_n or int(push_cfg.get("top_n") or sel.get("default_top_n") or 10)
     max_new_days = int(push_cfg.get("max_new_days") or 1)
+    max_new_hours = push_cfg.get("max_new_hours")
+    max_new_hours = int(max_new_hours) if max_new_hours is not None else None
+    if domestic_only is None:
+        domestic_only = bool(push_cfg.get("domestic_only", False))
     div = sel.get("diversity") or {}
     max_vendor = int(push_cfg.get("max_per_vendor") or div.get("max_per_vendor") or 2)
     max_platform = int(push_cfg.get("max_per_platform") or div.get("max_per_platform") or 4)
+    domestic = domestic_vendors(cfg)
 
     score_all_candidates(candidates, cfg)
 
-    def is_recent_official(ctx: CandidateContext) -> bool:
+    def eligible(ctx: CandidateContext) -> bool:
         if skip_official_filter:
-            return bool(ctx.skill.first_seen_at)
-        if not ctx.is_official or not ctx.skill.first_seen_at:
+            if not ctx.skill.first_seen_at:
+                return False
+        elif not ctx.is_official or not ctx.skill.first_seen_at:
             return False
-        if skip_recency_filter:
-            return True
-        age = (ref - ctx.skill.first_seen_at.date()).days
-        return age <= max_new_days
+        if domestic_only and ctx.skill.vendor not in domestic:
+            return False
+        return _is_recent_official(
+            ctx,
+            ref=ref,
+            ref_dt=ref_dt,
+            max_new_days=max_new_days,
+            max_new_hours=max_new_hours,
+            skip_recency_filter=skip_recency_filter,
+        )
 
-    items = [c for c in candidates if is_recent_official(c)]
+    items = [c for c in candidates if eligible(c)]
     items.sort(
         key=lambda c: (
             _official_new_priority(c),
@@ -195,14 +253,35 @@ def select_official_new_picks(
     for ctx in items:
         if len(result) >= top_n:
             break
-        v, src = ctx.skill.vendor, ctx.skill.source_id
-        if vendor_count.get(v, 0) >= max_vendor:
-            continue
-        if platform_count.get(src, 0) >= max_platform:
-            continue
+        if not skip_diversity_limits:
+            v, src = ctx.skill.vendor, ctx.skill.source_id
+            if vendor_count.get(v, 0) >= max_vendor:
+                continue
+            if platform_count.get(src, 0) >= max_platform:
+                continue
+            vendor_count[v] = vendor_count.get(v, 0) + 1
+            platform_count[src] = platform_count.get(src, 0) + 1
         ctx.slot = "official_new"
-        ctx.recommend_reason = build_recommend_reason(ctx, "official")
+        ctx.recommend_reason = build_recommend_reason(ctx, "official_new")
         result.append(ctx)
-        vendor_count[v] = vendor_count.get(v, 0) + 1
-        platform_count[src] = platform_count.get(src, 0) + 1
     return result
+
+
+def select_guaranteed_official_new(
+    candidates: list[CandidateContext],
+    cfg: dict[str, Any],
+    *,
+    ref_date: date | None = None,
+) -> list[CandidateContext]:
+    """综合精选保底：国内大公司 24h 内官方发布必入选（不受 top_n / 多样性截断）。"""
+    push_cfg = (cfg.get("push") or {}).get("official_new") or {}
+    if not push_cfg.get("guarantee_in_digest", True):
+        return []
+    return select_official_new_picks(
+        candidates,
+        cfg,
+        top_n=9999,
+        ref_date=ref_date,
+        skip_diversity_limits=True,
+        domestic_only=bool(push_cfg.get("domestic_only", True)),
+    )

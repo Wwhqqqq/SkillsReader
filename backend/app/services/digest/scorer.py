@@ -30,10 +30,14 @@ def platform_ratios(candidates: list[CandidateContext]) -> dict[str, float]:
 
 def _install_score(install: int, cfg: dict[str, Any]) -> float:
     scoring = cfg.get("scoring") or {}
-    exp = float(scoring.get("install_exponent") or 0.42)
-    mult = float(scoring.get("install_multiplier") or 3.2)
     if install <= 0:
         return 0.0
+    mode = str(scoring.get("install_score_mode") or "power")
+    if mode == "log10":
+        mult = float(scoring.get("install_log_multiplier") or 12.5)
+        return min(100.0, math.log10(install + 1) * mult)
+    exp = float(scoring.get("install_exponent") or 0.42)
+    mult = float(scoring.get("install_multiplier") or 3.2)
     return min(100.0, (install ** exp) * mult)
 
 
@@ -91,12 +95,17 @@ def score_candidate(
         install = ctx.skill.install_count or 0
         install_part = _install_score(install, cfg)
         vendor_part = score_official(ctx, cfg)
-        total = min(100.0, install_part * 0.55 + vendor_part * 0.45)
+        velocity = ctx.growth.trend_velocity_score or 0.0
+        iw = float(scoring.get("install_weight_in_total") or 0.48)
+        vw = float(scoring.get("vendor_weight_in_total") or 0.32)
+        tw = float(scoring.get("velocity_weight_in_total") or 0.20)
+        total = min(100.0, install_part * iw + vendor_part * vw + velocity * tw)
         breakdown = {
             "trend": round(install_part, 2),
             "official": round(vendor_part, 2),
             "quality": round(score_quality(ctx, cfg), 2),
             "diversity": round(score_diversity(ctx, ratios), 2),
+            "velocity": round(velocity, 2),
         }
         return round(total, 2), breakdown
 

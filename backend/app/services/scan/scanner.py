@@ -81,6 +81,8 @@ async def scan_source(
     await session.flush()  # 立即 INSERT 拿到 run.id，但未 commit
 
     source.last_status = "scanning"
+    # 预提交扫描状态，避免长事务持有行锁
+    await session.commit()
     await emit_event(
         session,
         event_type="scan_start",  # 事件类型，前端可过滤
@@ -124,6 +126,8 @@ async def scan_source(
         source.last_error = None
         source.items_total = (source.items_total or 0) + result.new_count
 
+        await session.commit()
+
         await emit_event(
             session,
             event_type="scan_done",
@@ -150,6 +154,11 @@ async def scan_source(
         run.finished_at = datetime.now(timezone.utc).replace(tzinfo=None)
         source.last_status = "error"
         source.last_error = str(exc)
+        try:
+            await session.rollback()
+        except Exception:
+            pass
+        await session.commit()
         await emit_event(
             session,
             event_type="scan_error",

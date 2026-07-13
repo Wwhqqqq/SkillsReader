@@ -13,6 +13,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from sqlalchemy import select
+from sqlalchemy.dialects.mysql import insert as mysql_insert
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.adapters.base import RawSkillRecord
@@ -122,7 +124,7 @@ async def ingest_records(
             result.updated_ids.append(existing.id)
             result.updated_count += 1
         else:
-            # ── 新 Skill：INSERT ──
+            # ── 新 Skill：INSERT（避免竞态条件 — 捕获 IntegrityError 后降级为 UPDATE）──
             skill = Skill(
                 fingerprint=fp,
                 vendor=record.vendor,
@@ -141,7 +143,40 @@ async def ingest_records(
                 metadata_json=metadata,
             )
             session.add(skill)
-            await session.flush()  # 获取 skill.id
+            try:
+                await session.flush()  # 获取 skill.id
+            except IntegrityError:
+                await session.rollback()
+                # 并发插入冲突：重新查询已有记录，走更新路径
+                existing = await session.scalar(select(Skill).where(Skill.fingerprint == fp))
+                if existing:
+                    existing.raw_description = record.raw_description or existing.raw_description
+                    existing.detail_url = record.detail_url or existing.detail_url
+                    existing.install_count = max(existing.install_count, record.install_count)
+                    existing.quality_score = max(existing.quality_score, quality)
+                    existing.last_seen_at = now
+                    existing.tags = record.tags or existing.tags
+                    parsed_pub = parse_publish_date(record.publish_date)
+                    if parsed_pub:
+                        existing.publish_date = parsed_pub
+                    if metadata:
+                        meta = dict(existing.metadata_json or {})
+                        meta.update(metadata)
+                        existing.metadata_json = enrich_metadata(
+                            meta,
+                            vendor=existing.vendor,
+                            source_id=existing.source_id,
+                            external_id=existing.external_id,
+                        )
+                    if status == "active":
+                        existing.status = "active"
+                    session.add(existing)
+                    await session.flush()
+                    result.updated_ids.append(existing.id)
+                    result.updated_count += 1
+                else:
+                    raise
+                continue
             canon_key = canonical_dedup_key(record)
             if canon_key:
                 canonical_index[canon_key] = skill

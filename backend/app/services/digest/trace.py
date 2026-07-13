@@ -243,7 +243,10 @@ async def run_traced_digest(
     items: list[DigestPickItem] = []
     pick_traces = []
     for i, ctx in enumerate(picks, start=1):
-        pool = next((p for p in ("official", "trend", "discovery", "popularity") if p in ctx.pools), "unknown")
+        pool = next(
+            (p for p in ("recent_24h", "recent_7d", "momentum", "official", "trend", "discovery", "popularity") if p in ctx.pools),
+            "unknown",
+        )
         items.append(
             DigestPickItem(
                 rank=i,

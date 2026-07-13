@@ -24,13 +24,21 @@ from app.models import Skill
 from app.adapters.common.platform_filters import is_platform_relevant, skill_as_record
 from app.services.scan.skill_gate import is_real_skill
 from app.services.digest.config_loader import domestic_vendors, load_digest_config
-from app.services.digest.metrics import GrowthMetrics, batch_growth_metrics
+from app.services.digest.metrics import (
+    GrowthMetrics,
+    batch_growth_metrics,
+    metric_abs_delta,
+    momentum_score,
+)
 from app.services.enrichment.skill_classification import PUBLISHER_OFFICIAL, publisher_type_for
 
 POOL_OFFICIAL = "official"
 POOL_POPULARITY = "popularity"
 POOL_TREND = "trend"
 POOL_DISCOVERY = "discovery"
+POOL_RECENT_24H = "recent_24h"
+POOL_RECENT_7D = "recent_7d"
+POOL_MOMENTUM = "momentum"
 
 
 @dataclass
@@ -82,6 +90,12 @@ def _is_skills_sh_trending(skill: Skill) -> bool:
     return bool(meta.get("trend_source")) and meta.get("section") in ("trending", "hot")
 
 
+def _first_seen_hours(skill: Skill, ref_now: datetime) -> float | None:
+    if not skill.first_seen_at:
+        return None
+    return (ref_now - skill.first_seen_at).total_seconds() / 3600.0
+
+
 def is_pool_eligible(skill: Skill, growth: GrowthMetrics, cfg: dict[str, Any]) -> bool:
     """判断是否满足进入候选池的硬条件（至少满足一条即可）。
 
@@ -113,6 +127,14 @@ def is_pool_eligible(skill: Skill, growth: GrowthMetrics, cfg: dict[str, Any]) -
         (cfg.get("pools") or {}).get("trend", {}).get("min_trend_velocity") or 0.5
     ):
         return True
+    ref_now = datetime.utcnow().replace(tzinfo=None)
+    age_h = _first_seen_hours(skill, ref_now)
+    if age_h is not None and age_h <= 24 * 7:
+        return True
+    if metric_abs_delta(growth, window="24h") > 0 or metric_abs_delta(growth, window="7d") > 0:
+        return True
+    if momentum_score(growth) > 0:
+        return True
     return False
 
 
@@ -122,6 +144,7 @@ def classify_pools(
     cfg: dict[str, Any],
     *,
     ref_date: date,
+    ref_now: datetime | None = None,
 ) -> set[str]:
     """将单个 Skill/ GrowthMetrics 分类到一个或多个池子（返回池名集合）。
 
@@ -134,6 +157,22 @@ def classify_pools(
     pub = publisher_type_for(skill)
     is_domestic = skill.vendor in domestic_vendors(cfg)
     sh_trend = _is_skills_sh_trending(skill)
+    ref_now = ref_now or datetime.utcnow().replace(tzinfo=None)
+    age_h = _first_seen_hours(skill, ref_now)
+    age = (ref_date - skill.first_seen_at.date()).days if skill.first_seen_at else 999
+
+    if age_h is not None and age_h <= 24:
+        pools.add(POOL_RECENT_24H)
+    if age_h is not None and age_h <= 24 * 7:
+        pools.add(POOL_RECENT_7D)
+
+    mom = momentum_score(growth)
+    d24 = metric_abs_delta(growth, window="24h")
+    d7 = metric_abs_delta(growth, window="7d")
+    mom_cfg = pools_cfg.get("momentum") or {}
+    min_delta = int(mom_cfg.get("min_abs_delta") or 1)
+    if mom > 0 and (d24 >= min_delta or d7 >= min_delta):
+        pools.add(POOL_MOMENTUM)
 
     if pub == PUBLISHER_OFFICIAL or meta.get("official"):
         pools.add(POOL_OFFICIAL)
@@ -152,7 +191,6 @@ def classify_pools(
         pools.add(POOL_TREND)
 
     disc = pools_cfg.get("discovery") or {}
-    age = (ref_date - skill.first_seen_at.date()).days if skill.first_seen_at else 999
     desc_len = len((skill.llm_summary or skill.raw_description or "").strip())
     if (
         age <= int(disc.get("max_age_days") or 14)
@@ -205,6 +243,7 @@ async def build_candidates(
 ) -> list[CandidateContext]:
     cfg = cfg or load_digest_config()
     ref = ref_date or datetime.utcnow().date()
+    ref_now = datetime.utcnow().replace(tzinfo=None)
     skills = await query_candidate_skills(session, cfg, vendors=vendors, ref_date=ref)
     growth_map = await batch_growth_metrics(session, skills, ref, cfg)
 
@@ -217,7 +256,7 @@ async def build_candidates(
         growth = growth_map[skill.id]
         if not is_pool_eligible(skill, growth, cfg):
             continue
-        pools = classify_pools(skill, growth, cfg, ref_date=ref)
+        pools = classify_pools(skill, growth, cfg, ref_date=ref, ref_now=ref_now)
         if not pools:
             continue
         pub = publisher_type_for(skill)
@@ -247,6 +286,7 @@ async def build_candidates_from_skill_ids(
         return []
     cfg = cfg or load_digest_config()
     ref = ref_date or datetime.utcnow().date()
+    ref_now = datetime.utcnow().replace(tzinfo=None)
     skills = list(
         (await session.scalars(select(Skill).where(Skill.id.in_(skill_ids)))).all()
     )
@@ -259,7 +299,7 @@ async def build_candidates_from_skill_ids(
         if not is_real_skill(skill):
             continue
         growth = growth_map[skill.id]
-        pools = classify_pools(skill, growth, cfg, ref_date=ref) or {POOL_OFFICIAL}
+        pools = classify_pools(skill, growth, cfg, ref_date=ref, ref_now=ref_now) or {POOL_OFFICIAL}
         pub = publisher_type_for(skill)
         age = (ref - skill.first_seen_at.date()).days if skill.first_seen_at else 999
         candidates.append(

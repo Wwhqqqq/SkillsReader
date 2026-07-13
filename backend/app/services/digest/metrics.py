@@ -87,6 +87,32 @@ def pct_growth(current: int, past: int | None) -> float:
     return growth_rate(current, past) * 100.0
 
 
+def metric_abs_delta(growth: GrowthMetrics, *, window: str = "24h") -> int:
+    """绝对增量：当前安装/Star 减窗口期前值（8h/24h/56h 对应 metrics 配置）。"""
+    cur = int(growth.metric_value or 0)
+    if window == "8h":
+        past = growth.value_1d_ago
+    elif window == "24h":
+        past = growth.value_3d_ago
+    else:
+        past = growth.value_7d_ago
+    if past is None:
+        return cur if cur > 0 else 0
+    return max(0, cur - int(past))
+
+
+def momentum_score(growth: GrowthMetrics) -> float:
+    """综合动量：绝对增量 + 相对增速，用于「变化最大」排序。"""
+    d24 = metric_abs_delta(growth, window="24h")
+    d7 = metric_abs_delta(growth, window="7d")
+    pct = max(
+        growth.growth_1d_pct or 0.0,
+        growth.growth_3d_pct or 0.0,
+        growth.growth_7d_pct or 0.0,
+    )
+    return d24 + d7 * 0.35 + pct * 50.0
+
+
 def _zscore(values: list[float]) -> list[float]:
     if len(values) < 2:
         return [0.0] * len(values)

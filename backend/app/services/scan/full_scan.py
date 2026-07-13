@@ -74,6 +74,11 @@ async def run_full_scan_batch(session: AsyncSession) -> FullScanBatchResult:
                     source_id=source.id,
                     level="error",
                 )
+                try:
+                    await session.rollback()
+                except Exception:
+                    pass
+                await session.commit()
 
         batch.new_skill_ids = list(dict.fromkeys(all_new))
         batch.new_official_skill_ids = await filter_official_new_ids(

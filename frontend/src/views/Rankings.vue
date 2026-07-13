@@ -12,10 +12,13 @@ const loading = ref(false)
 const meta = ref<any>({})
 
 const slotLabels: Record<string, string> = {
+  recent_24h: '24h新发现',
+  recent_7d: '7天内新发现',
+  momentum: '安装量变化',
   official: '官方精选',
   trend: '趋势爆发',
   discovery: '新发现',
-  fill: '综合推荐',
+  fill: '动量补位',
 }
 
 const columns = [

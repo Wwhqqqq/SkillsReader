@@ -48,14 +48,22 @@ const savingSchedule = ref(false)
 const channelLabels: Record<string, string> = {
   digest: '综合精选',
   official_new: '官方发布新增日报',
+  self_media: '自媒体定向推送',
 }
 
 const slotLabels: Record<string, string> = {
+  recent_24h: '24h新发现',
+  recent_7d: '7天内新发现',
+  momentum: '安装量变化',
   official: '官方精选',
   trend: '趋势爆发',
   discovery: '新发现',
-  fill: '综合推荐',
+  fill: '动量补位',
   official_new: '官方新增',
+  self_media: '自媒体',
+  self_media_unpushed: '🎯未推送',
+  self_media_pushed: '📋曾推送',
+  self_media_fill: '自媒体补位',
 }
 
 const targetLabels = computed(() => ({
@@ -217,6 +225,7 @@ function historyTargetLabel(target: string) {
 function historyTypeLabel(pushType: string) {
   if (pushType === 'digest_top10') return '综合精选'
   if (pushType === 'official_new_daily') return '官方新增日报'
+  if (pushType === 'self_media') return '自媒体定向推送'
   return pushType
 }
 
@@ -311,6 +320,7 @@ function growthLabel(g: any) {
         <NRadioGroup v-model:value="pushChannel">
           <NRadio value="digest">综合精选 Top N</NRadio>
           <NRadio value="official_new">官方发布新增日报</NRadio>
+          <NRadio value="self_media">自媒体定向推送</NRadio>
         </NRadioGroup>
       </div>
 
