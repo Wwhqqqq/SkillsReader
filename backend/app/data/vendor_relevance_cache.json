@@ -39155,5 +39155,741 @@
     "confidence": 0.0,
     "source": "llm",
     "prompt_version": "2"
+  },
+  "美团|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-275254cl-hash-coupon-finder-cn-skill-md": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:ayue-oss-skills-skills-meituan-coupon-auto-skill-md": {
+    "relevant": true,
+    "reason": "专门用于自动领取美团优惠券，核心功能依赖美团API，去掉美团后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:eleliauk-xiaowan-claude-skills-meituan-venue-guide-skill-md": {
+    "relevant": true,
+    "reason": "专门为美团业务线（外卖、闪购、团购等）设计的智能导购，推送美团会场链接，核心功能依赖美团。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:yintao2586672626-lang-suxios-agents-skills-hotel-auto-x-meituan-collector-skill-md": {
+    "relevant": true,
+    "reason": "专门用于美团评论、评分、流量等数据采集，核心功能依赖美团平台。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:yintao2586672626-lang-suxios-agents-skills-hotel-auto-x-login-skill-md": {
+    "relevant": false,
+    "reason": "并列支持美团和携程，属于多平台工具，不满足专属条件。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:yintao2586672626-lang-suxios-agents-skills-suxi-ota-pms-collector-operating-loop-skill-md": {
+    "relevant": false,
+    "reason": "并列支持携程、美团、PMS，属于多平台工具，不满足专属条件。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-01087-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，不满足专属条件。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-01210-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-02252-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-02602-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-03498-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-03879-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-04374-skill-md": {
+    "relevant": false,
+    "reason": "跨平台家庭补给系统，并列支持美团、拼多多、淘宝等多个平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-00180-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列列出美团与其他OTA平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-01976-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列列出美团与其他OTA平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-04166-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列列出美团与其他OTA平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-05209-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列列出美团与其他OTA平台，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-01961-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店聚合工具，整合多个酒店数据源，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:knownasnaffy-prompthound-dataset-case-02921-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店聚合工具，整合多个酒店数据源，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "美团|skillsmp:lijianlan1115-crypto-hotel-skills-s14-operation-diagnosis-skill-md": {
+    "relevant": false,
+    "reason": "描述中并列飞猪、美团、携程等多个OTA平台，属于多平台工具，非美团专属。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:majiayu000-claude-skill-registry-skills-data-aliyun-operations-skill-md": {
+    "relevant": true,
+    "reason": "专门用于阿里云服务器运维操作，核心功能依赖阿里云API，去掉阿里云后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-aohoyo-aliyun-oss-skill-skill-md": {
+    "relevant": true,
+    "reason": "专门调用阿里云OSS对象存储API，核心功能依赖阿里云，去掉后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-baokui-wan-text2image-skill-md": {
+    "relevant": true,
+    "reason": "专门使用阿里云百炼平台的Wan2.6模型，依赖DashScope API，去掉后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-alexmayanjun-collab-aliyun-codeup-skill-md": {
+    "relevant": true,
+    "reason": "专门用于阿里云云效Codeup代码仓库管理，核心功能依赖阿里云，去掉后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:video-production-buddy-video-production-buddy-agents-skills-dashscope-skill-md": {
+    "relevant": true,
+    "reason": "专门集成DashScope/阿里云百炼API，核心功能依赖阿里云，去掉后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:agents365-ai-imagencn-skills-imagencn-skill-md": {
+    "relevant": false,
+    "reason": "多平台AI图像生成工具，并列支持DashScope/Ark/Hunyuan/Zhipu/StepFun等多个平台，非阿里专属",
+    "confidence": 0.3,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:knownasnaffy-prompthound-dataset-case-00147-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是调用阿里云DashScope通义万相文生视频API，去掉阿里后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:knownasnaffy-prompthound-dataset-case-02019-skill-md": {
+    "relevant": true,
+    "reason": "与上一条相同，专门调用阿里云DashScope通义万相API",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:calesthio-generative-media-skills-skills-providers-text-to-speech-qwen3-tts-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是调用阿里/Qwen的TTS模型，通过DashScope/Model Studio，去掉阿里后价值消失",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "阿里|skillsmp:2799662352-ai-image-master-resources-first-party-skills-catimation-understand-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是使用qwen3.7-plus-dashscope模型进行视频/文档理解，专门调用阿里DashScope API",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:e703-notes-00-005-about-ai-skills-volcengine-tts-skill-skill-md": {
+    "relevant": true,
+    "reason": "专门调用火山引擎TTS API，使用用户克隆音色，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:seraph0017-skillcreator-trae-skills-volcengine-vision-skill-md": {
+    "relevant": true,
+    "reason": "专门调用火山引擎视觉模型Doubao-seed-1.6-vision，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-agentkit-samples-skills-byted-volcengine-alert-inspection-analyzer-skill-md": {
+    "relevant": true,
+    "reason": "面向火山引擎运维巡检场景，采集火山引擎告警体检信息，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-agentkit-samples-skills-byted-volcengine-capacity-auditor-skill-md": {
+    "relevant": true,
+    "reason": "专门针对火山引擎资源巡检、容量评估，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-agentkit-samples-skills-byted-volcengine-finops-skill-md": {
+    "relevant": true,
+    "reason": "专门分析火山引擎费用账单，使用火山引擎Python SDK，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-agentkit-samples-skills-byted-volcengine-topology-change-impact-skill-md": {
+    "relevant": true,
+    "reason": "面向火山引擎拓扑变更风险分析，依赖火山引擎topology.json，去掉火山引擎后价值消失",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:cyberkurry-seedream-volcengine-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是调用火山引擎Seedream图像生成API，去掉火山引擎后价值消失，且为字节系专属工具。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:shengwenyuan-cosmos3-rl-agents-skills-cosmos3-volcengine-training-skill-md": {
+    "relevant": true,
+    "reason": "专门指导火山引擎/MLP自定义训练任务，核心功能依赖火山引擎平台，去掉后无意义。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:volcengine-openviking-examples-cursor-memory-plugin-skills-openviking-memory-skill-md": {
+    "relevant": true,
+    "reason": "官方仓库volcengine/OpenViking的专属记忆管理工具，专门为火山引擎生态开发。",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:lzjin426-skills-using-coze-cli-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是Coze CLI工具，专门为扣子Coze平台开发，去掉Coze后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:majiayu000-claude-skill-registry-skills-context-management-claude-code-jwiegley-claude-prompts-skill-md": {
+    "relevant": false,
+    "reason": "通用Claude Code会话初始化工具，并列多个插件（Claude-mem、git-ai-search、Cozempic、PAL MCP），Cozempic仅其一，非字节专属。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:simoncobaya-ai-teaching-hub-skills-agentmaker-skill-md": {
+    "relevant": false,
+    "reason": "通用AI智能体开发教学工具，虽提及Coze但采用'Skill先行、Coze后置'策略，核心是教学流程而非Coze专属，去掉Coze后仍有价值。",
+    "confidence": 0.85,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:calesthio-generative-media-skills-skills-providers-image-generation-bytedance-seedream-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是调用字节跳动Seedream模型，通过火山引擎Ark或BytePlus ModelArk，去掉字节后价值消失。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:ceilf6-ceilf6-skills-report-writer-bytedance-skill-md": {
+    "relevant": true,
+    "reason": "专门为字节跳动员工生成飞书日报，依赖飞书/ Lark 生态，去掉字节后无意义。",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-deer-flow-skills-public-skill-reviewer-evals-fixtures-needs-revision-skill-md": {
+    "relevant": false,
+    "reason": "通用助手，描述模糊，不专门针对字节生态。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-deer-flow-skills-public-skill-reviewer-evals-fixtures-partial-package-skill-md": {
+    "relevant": false,
+    "reason": "测试用固定装置，非实际工具，不满足收录标准。",
+    "confidence": 0.05,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-deer-flow-skills-public-skill-reviewer-evals-fixtures-prompt-injection-skill-md": {
+    "relevant": false,
+    "reason": "测试用固定装置，非实际工具，不满足收录标准。",
+    "confidence": 0.05,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-deer-flow-skills-public-skill-reviewer-evals-fixtures-publish-candidate-skill-md": {
+    "relevant": false,
+    "reason": "通用Markdown笔记审阅工具，不依赖字节生态。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-deer-flow-skills-public-skill-reviewer-evals-fixtures-zh-output-skill-md": {
+    "relevant": false,
+    "reason": "通用技能审核工具，非字节专属API或开发者工具，去掉字节名称后价值仍存。",
+    "confidence": 0.15,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "字节|skillsmp:bytedance-deer-flow-skills-public-skill-reviewer-skill-md": {
+    "relevant": false,
+    "reason": "通用DeerFlow技能审核工具，非字节专属，去掉字节名称后价值仍存。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-allinherog-star-bilibili-sentiment-dashboard-skill-md": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:acane0320-openbbq-src-openbbq-skills-bilibili-cover-safe-area-skill-md": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:chartte02-bilibili-search-skill-md": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:vramrick-openclaw-skills-skills-baikemark-bilibili-summary-skill-md": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:wicsp-lumio-skills-bilibili-video-summary-skill-md": {
+    "relevant": false,
+    "reason": "多平台通用工具，非单一厂商定向开发",
+    "source": "heuristic",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:the1812-bilibili-evolved-agents-skills-bilibili-evolved-dev-server-skill-md": {
+    "relevant": true,
+    "reason": "专为Bilibili-Evolved项目开发服务器工作流，仅用于B站相关开发",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:werxiao882-cell-nanohermes-skills-openclaw-imports-bilibili-downloader-skill-md": {
+    "relevant": true,
+    "reason": "专门下载B站视频，提取音视频流，B站专属",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-agimodel-bilibili-skill-md": {
+    "relevant": true,
+    "reason": "专为B站设计文化共鸣视频，分析弹幕心理等，B站专属",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-275254cl-hash-bilibili-insight-skill-md": {
+    "relevant": true,
+    "reason": "B站UP主分析、视频数据追踪等，B站专属",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:958877748-skills-skills-bilibili-downloader-skill-md": {
+    "relevant": true,
+    "reason": "专门下载B站视频，B站专属",
+    "confidence": 0.98,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:fengqingmo-bilibili-video-summarizer-skill-skill-md": {
+    "relevant": true,
+    "reason": "从B站视频获取字幕生成笔记，B站专属",
+    "confidence": 0.97,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:gihana-hakudou-aigeme-aigeme-skill-bilibili-subtitle-skill-md": {
+    "relevant": true,
+    "reason": "专门提取B站视频字幕，核心功能依赖B站API，去掉B站后无价值",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:jesseqin123-clipmarts-products-agent-skills-bilibili-content-strategist-skill-md": {
+    "relevant": true,
+    "reason": "专为B站UP主提供增长策略和算法优化，核心用途是B站生态专属",
+    "confidence": 0.92,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-01117-skill-md": {
+    "relevant": true,
+    "reason": "专门转写B站视频为文本，核心功能依赖B站视频URL，去掉B站后无价值",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-01263-skill-md": {
+    "relevant": true,
+    "reason": "专门下载B站AI字幕，核心功能依赖B站API，去掉B站后无价值",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-01448-skill-md": {
+    "relevant": true,
+    "reason": "与上一条重复，专门下载B站AI字幕，核心功能依赖B站API",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-02371-skill-md": {
+    "relevant": true,
+    "reason": "与上一条重复，专门下载B站AI字幕，核心功能依赖B站API",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-03057-skill-md": {
+    "relevant": true,
+    "reason": "专门下载B站AI字幕，B站专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04033-skill-md": {
+    "relevant": true,
+    "reason": "专门下载B站AI字幕，B站专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04085-skill-md": {
+    "relevant": true,
+    "reason": "专门转写B站视频为文本，B站专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04193-skill-md": {
+    "relevant": true,
+    "reason": "专门转写B站视频为文本，B站专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04205-skill-md": {
+    "relevant": true,
+    "reason": "专门转写B站视频为文本，B站专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04597-skill-md": {
+    "relevant": true,
+    "reason": "专门分析B站AI视频并提取提示词，B站专属工具",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04670-skill-md": {
+    "relevant": true,
+    "reason": "专门为B站视频转文字设计，核心功能依赖B站视频URL，去掉B站后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04772-skill-md": {
+    "relevant": true,
+    "reason": "专门分析B站AI视频并提取提示词，核心功能依赖B站视频链接。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-04843-skill-md": {
+    "relevant": true,
+    "reason": "与04670相同，专门为B站视频转文字。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-05358-skill-md": {
+    "relevant": true,
+    "reason": "与04670相同，专门为B站视频转文字。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:knownasnaffy-prompthound-dataset-case-05394-skill-md": {
+    "relevant": true,
+    "reason": "与04772相同，专门分析B站AI视频。",
+    "confidence": 0.93,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:smwswk-xiaoming-agent-skills-skills-b_____-skill-md": {
+    "relevant": true,
+    "reason": "专门处理B站视频链接，进行转录和总结，核心功能依赖B站。",
+    "confidence": 0.94,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:cober2018-agent-promptskills-skills-bilibili-operation-skill-md": {
+    "relevant": false,
+    "reason": "该技能描述为B站中长视频运营策略，属于内容创作指导，而非调用B站API或开发者工具，不满足核心用途要求。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:lornshrimp-lorn-novelwriteskills-ai__-skills-ai__-__b__-skill-md": {
+    "relevant": false,
+    "reason": "该技能是AI科幻题材的包装层，要求输出B站版，但核心是内容创作而非调用B站API或专属自动化工作流。",
+    "confidence": 0.2,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:xiaobin83-bili-helper-at-orchestrator-skill-md": {
+    "relevant": true,
+    "reason": "专门处理B站@消息、互动编排、自动回复等，核心功能依赖B站API，去掉B站后价值不复存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:librarier-f-video-to-article-skill-skill-md": {
+    "relevant": false,
+    "reason": "支持YouTube和B站等多个平台，属于通用工具，不满足专属要求。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:222wcnm-dishang-dongman-skill-md": {
+    "relevant": false,
+    "reason": "该技能分析特定UP主的内容机制和社区互动，属于内容分析而非调用B站API或开发者工具。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:orange0618-mark-bili-down-mark-bili-down-skill-md": {
+    "relevant": true,
+    "reason": "专门将B站视频转换为Markdown笔记，依赖B站字幕提取，核心功能为B站专属。",
+    "confidence": 0.9,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "哔哩哔哩|skillsmp:imase0606-mini-openclaw-skills-video-summary-skill-md": {
+    "relevant": true,
+    "reason": "核心用途是处理B站视频链接、字幕，生成总结和笔记，去掉B站后价值消失，属于B站专属自动化工作流。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:biaowuqiong-ctrip-hotel-skill-skills-ctrip-hotel-price-skill-md": {
+    "relevant": true,
+    "reason": "核心用途为操控浏览器在携程搜索酒店并提取价格，专门为携程生态开发，去掉携程后价值不复存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:georgedoors888-gb-power-market-jj-openclaw-skills-skills-alexfeng75-ctrip-hotel-search-skill-md": {
+    "relevant": true,
+    "reason": "自动搜索携程酒店，支持实时比价和详情获取，专门为携程生态开发，去掉携程后价值不复存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:yintao2586672626-lang-suxios-agents-skills-hotel-auto-x-ctrip-collector-skill-md": {
+    "relevant": true,
+    "reason": "核心用途为携程评论收集、实时指标等，专门为携程生态开发，去掉携程后价值不复存在。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:yintao2586672626-lang-suxios-agents-skills-hotel-auto-x-login-skill-md": {
+    "relevant": false,
+    "reason": "描述中并列多个平台（PMS、美团、携程），属于多平台工具，非携程专属。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:yintao2586672626-lang-suxios-agents-skills-suxi-ota-pms-collector-operating-loop-skill-md": {
+    "relevant": false,
+    "reason": "描述中并列多个平台（携程、美团、PMS），属于多平台工具，非携程专属。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:knownasnaffy-prompthound-dataset-case-00180-skill-md": {
+    "relevant": false,
+    "reason": "酒店比价助手，对比携程、美团、同程等多个OTA平台，属于跨平台对比工具，非携程专属。",
+    "confidence": 0.1,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:knownasnaffy-prompthound-dataset-case-01976-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列携程、美团、同程等，非携程专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:knownasnaffy-prompthound-dataset-case-04166-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列携程、美团、同程等，非携程专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:knownasnaffy-prompthound-dataset-case-05209-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店比价工具，并列携程、美团、同程等，非携程专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:knownasnaffy-prompthound-dataset-case-01961-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店聚合工具，并列分贝通、携程、美团等，非携程专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:knownasnaffy-prompthound-dataset-case-02921-skill-md": {
+    "relevant": false,
+    "reason": "多平台酒店聚合工具，并列分贝通、携程、美团等，非携程专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "携程|skillsmp:lijianlan1115-crypto-hotel-skills-s14-operation-diagnosis-skill-md": {
+    "relevant": false,
+    "reason": "多OTA诊断工具，并列飞猪、美团、携程等，非携程专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:didit-protocol-skills-skills-didit-transaction-monitoring-skill-md": {
+    "relevant": false,
+    "reason": "Didit 是另一家区块链合规公司，非滴滴出行，主体错误。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:ayue-oss-skills-skills-didi-coupon-auto-skill-md": {
+    "relevant": true,
+    "reason": "专门为滴滴出行自动领取优惠券，核心功能依赖滴滴平台，去掉滴滴后无价值。",
+    "confidence": 0.95,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:claudianus-superliora-packages-agent-core-src-skill-catalog-luokai-oc-didit-aml-screening-skill-md": {
+    "relevant": false,
+    "reason": "Didit 是另一家区块链合规公司，非滴滴出行，主体错误。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:78f453c5b2c588fa50bb2c471bb2983a": {
+    "relevant": false,
+    "reason": "Didit 是另一家区块链合规公司，非滴滴出行，主体错误。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:lossless-group-augment-it-context-v-agent-skills-inbox-curation-skill-md": {
+    "relevant": false,
+    "reason": "描述中的 'didi' 是内部角色名或昵称，非滴滴出行公司，核心功能与滴滴平台无关。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:lossless-group-lossless-agent-skills-slide-target-skill-md": {
+    "relevant": false,
+    "reason": "描述中的 'DidiDecks' 是内部产品名，非滴滴出行，核心功能与滴滴平台无关。",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:intelli-verse-x-agent-skills-skills-ivx-mcp-measure-monitor-skill-md": {
+    "relevant": false,
+    "reason": "多平台工具，并列多个服务（Grafana、AWS、Stripe、GA4等），仅举例提到Didit/Veriff KYC，非滴滴专属",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
+  },
+  "滴滴|skillsmp:shuiliulcl-claw-skills-skills-x6-find-item-id-skill-md": {
+    "relevant": false,
+    "reason": "通用游戏道具ID查询工具，提及“滴滴打鸟”仅为游戏内道具名称，与滴滴厂商无关",
+    "confidence": 0.0,
+    "source": "llm",
+    "prompt_version": "2"
   }
 }

@@ -1,4 +1,8 @@
-"""Volcengine AgentKit OpenAPI client (ListSharingSkills)."""
+"""Volcengine AgentKit OpenAPI client (ListSharingSkills).
+
+volcenginesdkcore 不是 PyPI 公开包，需要从火山引擎官方安装。
+未安装时该模块优雅降级，不影响其他功能。
+"""
 
 from __future__ import annotations
 
@@ -7,7 +11,6 @@ import logging
 from typing import Any
 
 import httpx
-from volcenginesdkcore.signv4 import SignerV4
 
 from app.core.config import get_settings
 
@@ -18,9 +21,29 @@ API_VERSION = "2025-10-30"
 DEFAULT_REGION = "cn-beijing"
 HOST = f"{SERVICE}.{DEFAULT_REGION}.volcengineapi.com"
 
+_SignerV4 = None
+
+
+def _get_signer():
+    """延迟加载 volcenginesdkcore。未安装时返回 None。"""
+    global _SignerV4
+    if _SignerV4 is None:
+        try:
+            from volcenginesdkcore.signv4 import SignerV4  # type: ignore[import-not-found]
+            _SignerV4 = SignerV4
+        except ImportError:
+            logger.warning(
+                "volcenginesdkcore not installed — AgentKit scan disabled. "
+                "Install with: pip install volcenginesdkcore"
+            )
+    return _SignerV4
+
 
 def _sign_post(*, access_key: str, secret_key: str, query: dict[str, str], body: str, region: str) -> dict[str, str]:
     headers = {"Host": HOST, "Content-Type": "application/json"}
+    SignerV4 = _get_signer()
+    if SignerV4 is None:
+        raise ImportError("volcenginesdkcore is required for AgentKit API")
     SignerV4.sign("/", "POST", headers, body, {}, query, access_key, secret_key, region, SERVICE)
     return headers
 
@@ -36,6 +59,10 @@ async def list_sharing_skills(*, page_size: int = 100, page_number: int = 1) -> 
     region = settings.volcengine_region or DEFAULT_REGION
     all_items: list[dict[str, Any]] = []
     page = page_number
+
+    if _get_signer() is None:
+        logger.info("Skipping AgentKit scan — volcenginesdkcore not available")
+        return []
 
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
